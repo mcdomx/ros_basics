@@ -51,7 +51,14 @@ docker run -it --rm --name picam --env ROS_MASTER_URI=http://$LOCALIP:11311/  -e
 
 Turtle sim
 docker build -t turtlesim --rm .
+
+container 1:
 docker run -it --rm --name turtlesim --env ROS_MASTER_URI=http://$LOCALIP:11311/  -e DISPLAY=$LOCALIP:0 -v /tmp/.X11-unix:/tmp/.X11-unix:ro turtlesim
+	rosrun turtlesim turtlesim_node
+
+container 2:
+docker run -it --rm --name turtlesim-key --env ROS_MASTER_URI=http://$LOCALIP:11311/  -e DISPLAY=$LOCALIP:0 -v /tmp/.X11-unix:/tmp/.X11-unix:ro turtlesim	
+	rosrun turtlesim turtlesim_teleop_key
 
 
 USING DOCKER-COMPOSE
