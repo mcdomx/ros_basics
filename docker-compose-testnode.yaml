@@ -1,0 +1,36 @@
+
+version: '3.7'
+
+services:
+
+  rosbasic:
+    build:
+      context: ./rosbasic
+      dockerfile: Dockerfile
+
+  roscore:
+    build:
+      context: ./roscore
+      dockerfile: Dockerfile
+    image: roscore
+    environment:
+      LOCALIP: 10.0.1.5
+      DISPLAY: $LOCALIP:0
+#      ROS_MASTER_URI: http://$LOCALIP:11311/
+    ports:
+      - "11311:11311"
+    volumes:
+      - "/tmp/.X11-unix:/tmp/.X11-unix:ro"
+
+  testnode:
+    build:
+      context: ./testnode
+      dockerfile: Dockerfile
+    image: testnode
+    environment:
+      LOCALIP: 10.0.1.5
+      ROS_MASTER_URI: http://10.0.1.5:11311/
+      ROS_HOSTNAME: marks-imac
+      DISPLAY: $LOCALIP:0
+    volumes:
+      - "/tmp/.X11-unix:/tmp/.X11-unix:ro"

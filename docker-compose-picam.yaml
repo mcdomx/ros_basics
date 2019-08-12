@@ -1,21 +1,12 @@
 
-version: '3.7'
+version: '3.3'
 
 services:
 
-  roscore:
+  rosbasic:
     build:
-      context: ./roscore
+      context: ./rosbasic
       dockerfile: Dockerfile
-    image: roscore
-    ports:
-      - "11311:11311"
-    environment:
-      LOCALIP: 10.0.1.5
-      DISPLAY: $LOCALIP:0
-    volumes:
-      - "/tmp/.X11-unix:/tmp/.X11-unix:ro"
-    command: roscore
 
   picam:
     build:
@@ -24,8 +15,10 @@ services:
     image: picam
     environment:
       LOCALIP: 10.0.1.5
-      ROS_MASTER_URI: http://$LOCALIP:11311/
+      ROS_MASTER_URI: http://10.0.1.5:11311/
+      ROS_HOSTNAME: marks-imac
       DISPLAY: $LOCALIP:0
     volumes:
       - "/tmp/.X11-unix:/tmp/.X11-unix:ro"
-    command: 'python /catkin_ws/src/picam/testnode.py'
+#    command: "./run_roscore.sh"
+#    command: 'python /catkin_ws/src/picam/testnode.py'

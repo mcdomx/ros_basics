@@ -1,7 +1,16 @@
-# This is a test node that will create a turtlesim package
-# that will connect to the local roscore network
-FROM rosbasic
+# rosbasic image
 
+# used as the template image for building ros containers
+
+FROM ros:melodic-ros-core-bionic
+
+RUN apt-get update
+RUN apt-get install -y nano curl
+RUN apt-get install -y ros-melodic-rqt
+RUN apt-get install -y ros-melodic-rqt-graph
+RUN apt-get install -y ros-melodic-rqt-common-plugins
+
+# Setup base catkin environment
 RUN echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> ~/.bashrc
 RUN mkdir /catkin_ws
 RUN mkdir /catkin_ws/src
@@ -12,10 +21,3 @@ RUN . /opt/ros/$ROS_DISTRO/setup.sh && catkin_make
 RUN chmod +x /catkin_ws/devel/setup.sh
 RUN echo "source /catkin_ws/devel/setup.bash" >> ~/.bashrc
 RUN . /catkin_ws/devel/setup.sh
-
-RUN apt-get update
-RUN apt-get install -y nvidia-340 mesa-utils # solve LIBGL error
-RUN apt-get install -y ros-melodic-turtlesim
-
-ADD  run_turtlesim.sh run_turtlesim.sh
-CMD ./run_turtlesim.sh

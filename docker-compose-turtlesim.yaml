@@ -3,6 +3,11 @@ version: '3.7'
 
 services:
 
+  rosbasic:
+    build:
+      context: ./rosbasic
+      dockerfile: Dockerfile
+
   roscore:
     build:
       context: ./roscore
@@ -15,7 +20,7 @@ services:
       DISPLAY: $LOCALIP:0
     volumes:
       - "/tmp/.X11-unix:/tmp/.X11-unix:ro"
-    command: roscore
+    command: "./run_roscore.sh"
 
   turtlesim:
     build:
@@ -25,7 +30,20 @@ services:
     environment:
       LOCALIP: 10.0.1.5
       ROS_MASTER_URI: http://$LOCALIP:11311/
+      ROS_HOSTNAME: Marks-iMac.local
       DISPLAY: $LOCALIP:0
     volumes:
       - "/tmp/.X11-unix:/tmp/.X11-unix:ro"
-    command: 'rosrun turtlesim '
+    
+#  turtlesimkey:
+#    build:
+#      context: ./turtlesim
+#      dockerfile: Dockerfile
+#    image: turtlesim
+#    environment:
+#      LOCALIP: 10.0.1.5
+#      ROS_MASTER_URI: http://$LOCALIP:11311/
+#      DISPLAY: $LOCALIP:0
+#    volumes:
+#      - "/tmp/.X11-unix:/tmp/.X11-unix:ro"
+#    command: "rosrun turtlesim turtlesim_teleop_key"
