@@ -2,6 +2,13 @@
 
 import rospy
 from std_msgs.msg import String
+# import signal
+import sys
+
+# handle kill command
+# def signal_handler(sig, frame):
+#     print('Stopping .....')
+#     sys.exit(0)
 
 if __name__ == '__main__':
         rospy.init_node('publisher_node')
@@ -15,12 +22,16 @@ if __name__ == '__main__':
         print("Created /publisher_topic.  Starting to publish messages...")
         # while the node is running (not shutdown)
         i = 1
-        while not rospy.is_shutdown():
-            msg = String()
-            msg.data = "News radio info .. {}".format(i)
-            pub.publish(msg)
-            print ("..published message .. {}".format(i))
-            i = i + 1
-            rate.sleep() # this will 'pulse' the loop at the rate
+        try:
+            while not rospy.is_shutdown():
+                msg = String()
+                msg.data = "News radio info .. {}".format(i)
+                pub.publish(msg)
+                print ("..published message .. {}".format(i))
+                i = i + 1
+                rate.sleep() # this will 'pulse' the loop at the rate
+        except KeyboardInterrupt:
+            print("Stopping ....")
+            sys.exit(0)
 
-        rospy.loginfo("exiting publisher.py")
+        sys.exit(0)
