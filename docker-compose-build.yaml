@@ -2,10 +2,10 @@
 version: '3.3'
 
 services:
- rosbasic:
-   build:
-     context: ./rosbasic
-     dockerfile: Dockerfile
+  rosbasic:
+    build:
+      context: ./rosbasic
+      dockerfile: Dockerfile
 
   roscore:
     build:
@@ -20,4 +20,9 @@ services:
   subscriber:
     build:
       context: ./subscriber
+      dockerfile: Dockerfile
+      
+  service_server:
+    build:
+      context: ./service_server
       dockerfile: Dockerfile

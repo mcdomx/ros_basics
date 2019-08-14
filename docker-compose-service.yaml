@@ -1,0 +1,36 @@
+
+version: '3.3'
+
+networks:
+  rosnet:
+    driver: bridge
+
+services:
+
+  roscore:
+    build:
+      context: ./roscore
+      dockerfile: Dockerfile
+    networks:
+      - rosnet
+    image: roscore
+    environment:
+      DISPLAY: ${LOCALIP?err}:0
+      ROS_MASTER_URI: http://roscore:11311/
+    volumes:
+      - "/tmp/.X11-unix:/tmp/.X11-unix:ro"
+
+  service_server:
+    build:
+      context: ./service_server
+      dockerfile: Dockerfile
+    networks:
+      - rosnet
+    image: service_server
+    environment:
+      DISPLAY: ${LOCALIP?err}:0
+      ROS_MASTER_URI: http://roscore:11311/
+    volumes:
+      - "/tmp/.X11-unix:/tmp/.X11-unix:ro"
+  
+  

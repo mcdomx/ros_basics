@@ -15,9 +15,9 @@ if __name__ == '__main__':
         rospy.loginfo("Service server has been started")
 
         # Create a service
-        service = rospy.Subscriber("/basic_service", AddTwoInts, handle_service_request)
+        service = rospy.Service("/basic_service", AddTwoInts, handle_service_request)
 
         # stops and waits for here until message received
         rospy.spin()
 
-        rospy.loginfo("existing service.py")
+        rospy.loginfo("exiting service_server.py")
