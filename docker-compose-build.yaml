@@ -1,0 +1,23 @@
+
+version: '3.3'
+
+services:
+ rosbasic:
+   build:
+     context: ./rosbasic
+     dockerfile: Dockerfile
+
+  roscore:
+    build:
+      context: ./roscore
+      dockerfile: Dockerfile
+
+  publisher:
+    build:
+      context: ./publisher
+      dockerfile: Dockerfile
+  
+  subscriber:
+    build:
+      context: ./subscriber
+      dockerfile: Dockerfile
