@@ -14,5 +14,5 @@ while ! (rosnode list | grep rosout); do echo "waiting..."; sleep 5 ; done
 
 echo ">>>>>>>>>>>> publisher is running on master: $ROS_MASTER_URI"
 
-python /catkin_ws/src/publisher_pkg/src/publisher.py
-# rosrun publisher_pkg publisher.py
+python /catkin_ws/src/master_pkg/src/publisher.py
+# rosrun master_pkg publisher.py
