@@ -1,6 +1,42 @@
 # ros_basics
 ROS Learning Environment
 
+This project will setup a local network of bots that can speak with each other.
+
+ROS will be run inside of Dokcer containers on each of the pi devices.  Note that ROS cannot work when 
+any of the containers are running on a Mac.  Docker for Mac runs docker containers inside of a 
+virutal machine which complicated the comminincation between different hosts on the 
+network.
+
+This will require 2 raspberry pi devices connected to the same local network.
+
+## Step 1 - Setup Pi devices
+The Pi devices will use Hypriot images.  Hypriot is a Raspian image that is
+customized to use Docker from the start.  
+
+### Install Hypriot Flash
+See github: https://github.com/hypriot/flash
+
+### Flash SD Card:
+Before starting the flash procedure, you will configure 2 files to setup the device
+with a specific configuration such as WiFi information, host name, user name and password.
+These configuration values are stored in a file called wlan-user-data.yaml for
+user data and another file call no-uart-config.txt for basic hardware settings.
+	flash --userdata ./wlan-user-data.yaml --bootconf ./no-uart-config.txt https://github.com/hypriot/image-builder-rpi/releases/download/v1.11.1/hypriotos-rpi-v1.11.1.img.zip
+
+Make sure to install dependencies.
+Install flash software
+Create wlan and config files per the site's samples.
+(https://github.com/hypriot/flash/tree/2.3.0/sample)
+
+The new card will need ssh keys put on it for easy ssh login
+
+
+I found the following dependency needed to be added to work with mac's:
+sudo apt-get install libnss-mdns
+
+
+
 Installed Hypriot on pi device.
 Install on pi device to get access to mac's hostname from pi:
 	sudo apt-get install libnss-mdns
@@ -91,12 +127,6 @@ On worker:
 
 
 
-
-To communicate between containers, you need to create a network:
-
-	docker network create --attachable rosnet
-
-and then start every container using --net rosnet
 
 On pidev1
 	docker run -it --name roscore -p 11311:11311 -e DISPLAY=$LOCALIP:0 -v /tmp/.X11-unix:/tmp/.X11-unix:ro --net=host roscore 

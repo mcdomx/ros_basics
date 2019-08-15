@@ -8,7 +8,7 @@
 # Documentation: http://cloudinit.readthedocs.io/en/0.7.9/index.html
 
 # Set your hostname here, the manage_etc_hosts will update the hosts file entries as well
-hostname: pidev1
+hostname: pidev2
 manage_etc_hosts: true
 
 # You could modify this for your own user information
@@ -18,7 +18,7 @@ users:
     sudo: ALL=(ALL) NOPASSWD:ALL
     shell: /bin/bash
     groups: users,docker,video
-    plain_text_passwd: Chelsea1*
+    plain_text_passwd: xxx
     lock_passwd: false
     ssh_pwauth: true
     chpasswd: { expire: false }
