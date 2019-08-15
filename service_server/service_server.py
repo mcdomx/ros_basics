@@ -2,12 +2,12 @@
 
 import rospy
 from std_msgs.msg import String
-from rospy_tutorials.srv import AddTwoInts
+from custom_messages_pkg.srv import TwoInts_OneInt
 
 # called when service is requested
-def handle_service_request(request):
-	result = request.a + request.b
-        rospy.loginfo("Sum" + str(request.a) + " + " + str(request.b) + " = " + str(result))
+def handle_addition_request(request):
+	result = request.input1 + request.input2
+        rospy.loginfo("Sum" + str(request.input1) + " + " + str(request.input2) + " = " + str(result))
         return result
 
 if __name__ == '__main__':
@@ -15,7 +15,7 @@ if __name__ == '__main__':
         rospy.loginfo("Service server has been started")
 
         # Create a service
-        service = rospy.Service("/basic_service", AddTwoInts, handle_service_request)
+        service = rospy.Service("/addition_service", TwoInts_OneInt, handle_addition_request)
 
         # stops and waits for here until message received
         rospy.spin()

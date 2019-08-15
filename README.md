@@ -22,24 +22,75 @@ Before starting the flash procedure, you will configure 2 files to setup the dev
 with a specific configuration such as WiFi information, host name, user name and password.
 These configuration values are stored in a file called wlan-user-data.yaml for
 user data and another file call no-uart-config.txt for basic hardware settings.
-	flash --userdata ./wlan-user-data.yaml --bootconf ./no-uart-config.txt https://github.com/hypriot/image-builder-rpi/releases/download/v1.11.1/hypriotos-rpi-v1.11.1.img.zip
 
-Make sure to install dependencies.
-Install flash software
-Create wlan and config files per the site's samples.
-(https://github.com/hypriot/flash/tree/2.3.0/sample)
+Examples of these files can be found at:
+https://github.com/hypriot/flash/tree/2.3.0/sample
 
-The new card will need ssh keys put on it for easy ssh login
+	<code>flash --userdata ./wlan-user-data.yaml --bootconf ./no-uart-config.txt https://github.com/hypriot/image-builder-rpi/releases/download/v1.11.1/hypriotos-rpi-v1.11.1.img.zip<\code>
 
+### Boot Pi with New Card
+Inser the card and power up the Pi.
 
-I found the following dependency needed to be added to work with mac's:
-sudo apt-get install libnss-mdns
+### Pi Configurations
+A few small things need to be setup to make working with the Pi device
+more convenient.  Additionally, we will load the project software on to the
+device.
 
+#### Add ssh keys
+Navigate the the home directory and create a directory called .ssh.
 
+From the host computer that you will use to loginto the pi, navigate the the ~/.ssh
+directory:
 
-Installed Hypriot on pi device.
-Install on pi device to get access to mac's hostname from pi:
+	cat ./id_rsa.pub | ssh <pi-user-id>@<pi-hostname>.local 'cat >> .ssh/authorized_keys'
+	
+This will avoid the need for a password at each login.
+
+#### Install a Missing Library
+The following library should be installed to make communciation with a mac
+host a little easier:
+
+	sudo apt-get update
 	sudo apt-get install libnss-mdns
+	
+#### Clone the Project Repo
+Create a directory to keep the project in.  I use ~/projects.
+From that directory:
+
+	git clone https://github.com/mcdomx/ros_basics.git
+	
+
+### Build containers
+
+
+### Run containers to test connectivity
+
+On pidev1
+	
+	docker run -it --name roscore -p 11311:11311 -e DISPLAY=$LOCALIP:0 -v /tmp/.X11-unix:/tmp/.X11-unix:ro --net=host roscore 
+
+On pidev2
+	
+	docker run --name publisher --env ROS_MASTER_URI=http://pidev1:11311 --tty=True --net=host publisher
+
+On pidev1
+
+	docker run --name subscriber  --env ROS_MASTER_URI=http://pidev1:11311 --tty=True  --net=host subscriber
+
+
+### Run Service Server
+
+On pidev1 (if roscore is not already running)
+
+	docker run -it --name roscore -p 11311:11311 -e DISPLAY=$LOCALIP:0 -v /tmp/.X11-unix:/tmp/.X11-unix:ro --net=host roscore 
+
+On pidev2
+	
+	docker run -it --name service_server --env ROS_MASTER_URI=http://pidev1:11311 --tty=True  --net=host service_server
+	
+
+
+
 
 Each part of this project is designed to run in a docker container.
 
@@ -80,39 +131,6 @@ Enable ipaddress with xhost:
 
 
 
-Start roscore container
-docker run -it --rm --name roscore -p 11311:11311 -e DISPLAY=$LOCALIP:0 -v /tmp/.X11-unix:/tmp/.X11-unix:ro roscore roscore
-
-docker run -it --rm --name roscore -P -e DISPLAY=$LOCALIP:0 -v /tmp/.X11-unix:/tmp/.X11-unix:ro roscore roscore
-
-Get IP of local machine:
-ifconfig en1 | grep 'inet0 ' | cut -d' ' -f2
-export LOCALIP=<local network ip address of machine running roscore>
-
-
-Run nodes with that ROS_MASTER_URI env variable set
-docker run -it --rm --name picam --env ROS_MASTER_URI=http://$LOCALIP:11311/  -e DISPLAY=$LOCALIP:0 -v /tmp/.X11-unix:/tmp/.X11-unix:ro picam
-
-Turtle sim
-docker build -t turtlesim --rm .
-docker build -t turtlesimkey --rm .
-
-container 1:
-docker run -it --rm --name turtlesim --env ROS_MASTER_URI=http://$LOCALIP:11311/  -e DISPLAY=$LOCALIP:0 -v /tmp/.X11-unix:/tmp/.X11-unix:ro turtlesim
-	rosrun turtlesim turtlesim_node
-
-container 2:
-docker run -it --rm --net=host --name turtlesim-key --env ROS_MASTER_URI=http://$LOCALIP:11311/  -e DISPLAY=$LOCALIP:0 -v /tmp/.X11-unix:/tmp/.X11-unix:ro turtlesim	
-	rosrun turtlesim turtlesim_teleop_key
-
-https://docs.docker.com/network/network-tutorial-overlay/
-On host1, initialize the node as a swarm (manager).
-On host2, join the node to the swarm (worker).
-On host1, create an attachable overlay network (test-net).
-On host1, run an interactive alpine container (alpine1) on test-net.
-On host2, run an interactive, and detached, alpine container (alpine2) on test-net.
-On host1, from within a session of alpine1, ping alpine2.
-
 SETUP Swarm Mode:
 Open ports:
 	TCP port 2377 for cluster management communications
@@ -128,14 +146,7 @@ On worker:
 
 
 
-On pidev1
-	docker run -it --name roscore -p 11311:11311 -e DISPLAY=$LOCALIP:0 -v /tmp/.X11-unix:/tmp/.X11-unix:ro --net=host roscore 
 
-On pidev2
-	docker run --name publisher --env ROS_MASTER_URI=http://pidev1:11311 --tty=True --net=host publisher
-
-On pidev1
-	docker run --name subscriber  --env ROS_MASTER_URI=http://pidev1:11311 --tty=True  --net=host subscriber
 
 
 PORTAINER
