@@ -98,11 +98,14 @@ To communicate between containers, you need to create a network:
 
 and then start every container using --net rosnet
 
-	docker run -it --name roscore -p 11311:11311 -e DISPLAY=$LOCALIP:0 -v /tmp/.X11-unix:/tmp/.X11-unix:ro roscore roscore
+On pidev1
+	docker run -it --name roscore -p 11311:11311 -e DISPLAY=$LOCALIP:0 -v /tmp/.X11-unix:/tmp/.X11-unix:ro --net=host roscore 
 
-	docker run --name publisher --env ROS_MASTER_URI=http://10.0.1.5:11311/ --env ROS_IP=10.0.1.5 --tty=True publisher
-	
-	docker run --name subscriber  --tty=True  --rm --env ROS_MASTER_URI --env ROS_IP  subscriber
+On pidev2
+	docker run --name publisher --env ROS_MASTER_URI=http://pidev1:11311 --tty=True --net=host publisher
+
+On pidev1
+	docker run --name subscriber  --env ROS_MASTER_URI=http://pidev1:11311 --tty=True  --net=host subscriber
 
 
 PORTAINER

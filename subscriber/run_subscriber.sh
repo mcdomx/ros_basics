@@ -12,7 +12,7 @@ sleep 2
 
 while ! (rosnode list | grep rosout); do echo "waiting..."; sleep 5 ; done
 
-python /catkin_ws/src/masterpkg/src/subscriber.py
+python /catkin_ws/src/master_pkg/src/subscriber.py
 # rosrun master_pkg subscriber.py
 
 echo ">>>>>>>>>>>> subscriber is running on master: $ROS_MASTER_URI"
