@@ -75,6 +75,4 @@ RUN catkin_create_pkg master_pkg rospy std_msgs custom_messages_pkg
 WORKDIR /catkin_ws
 RUN . /opt/ros/$ROS_DISTRO/setup.sh && catkin_make
 
-RUN source ~/.bashrc
-
 
