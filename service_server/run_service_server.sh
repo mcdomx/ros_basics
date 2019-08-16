@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 echo "********************************************************"
 echo "SERVICE SERVER NODE"
@@ -7,10 +7,13 @@ echo "ROS_HOSTNAME: $ROS_HOSTNAME"
 echo "ROS_IP: $ROS_IP"
 echo "********************************************************"
 
+# Give time to startup
+sleep 3
 
 while ! (rosnode list | grep rosout); do echo "waiting..."; sleep 5 ; done
 
-source ~/.bashrc
+# not sure if I need this - need to use bash to run /bin/bash
+# source ~/.bashrc
 
 python /catkin_ws/src/master_pkg/src/service_server.py
 # rosrun master_pkg service_server.py
