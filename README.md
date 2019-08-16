@@ -67,28 +67,35 @@ From that directory:
 
 On pidev1
 	
-	docker run -it --name roscore -p 11311:11311 -e DISPLAY=$LOCALIP:0 -v /tmp/.X11-unix:/tmp/.X11-unix:ro --net=host roscore 
+	docker run -it --rm --name roscore --net=host roscore 
 
 On pidev2
 	
-	docker run --name publisher --env ROS_MASTER_URI=http://pidev1:11311 --tty=True --net=host publisher
+	docker run --rm --name publisher --env ROS_MASTER_URI=http://10.0.1.27:11311 -e ROS_HOSTNAME=10.0.1.26  --tty=True --net=host publisher
 
 On pidev1
 
-	docker run --name subscriber  --env ROS_MASTER_URI=http://pidev1:11311 --tty=True  --net=host subscriber
+	docker run --rm --name subscriber --env ROS_MASTER_URI=http://10.0.1.27:11311 -e ROS_HOSTNAME=10.0.1.27  --tty=True --net=host subscriber
 
 
 ### Run Service Server
 
 On pidev1 (if roscore is not already running)
 
-	docker run -it --name roscore -p 11311:11311 -e DISPLAY=$LOCALIP:0 -v /tmp/.X11-unix:/tmp/.X11-unix:ro --net=host roscore 
+	docker run -it --rm --name roscore --net=host roscore 
 
 On pidev2
 	
-	docker run -it --name service_server --env ROS_MASTER_URI=http://pidev1:11311 --tty=True  --net=host service_server
+	docker run --rm --name service_server --env ROS_MASTER_URI=http://10.0.1.27:11311 -e ROS_HOSTNAME=10.0.1.26 --tty=True --net=host service_server
 	
 
+
+## Using the Mac for Graphical Output
+To get graphic output on a mac, add the following switches to the docker run statement:
+
+	-e DISPLAY=$LOCALIP:0 -v /tmp/.X11-unix:/tmp/.X11-unix:ro
+
+Additionally, Xquartz will need to be running on the mac
 
 
 

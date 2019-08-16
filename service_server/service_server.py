@@ -2,7 +2,7 @@
 
 import rospy
 from std_msgs.msg import String
-from custom_messages_pkg.srv import TwoInts_OneInt
+from custom_messages_pkg import TwoInts_OneInt
 
 # called when service is requested
 def handle_addition_request(request):
