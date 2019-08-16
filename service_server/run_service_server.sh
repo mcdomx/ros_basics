@@ -13,10 +13,10 @@ echo "********************************************************"
 while ! (rosnode list | grep rosout); do echo "waiting..."; sleep 5 ; done
 
 # not sure if I need this - need to use bash to run /bin/bash
-# source ~/.bashrc
+source ~/.profile
 
 # python /catkin_ws/src/master_pkg/src/service_server.py
-bash -c 'rosrun master_pkg service_server.py'
+# bash -c 'rosrun master_pkg service_server.py'
 # rosrun master_pkg service_server.py
 
 echo ">>>>>>>>>>>> service server is running on master: $ROS_MASTER_URI"
