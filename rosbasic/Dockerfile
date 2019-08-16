@@ -20,11 +20,11 @@ RUN . /opt/ros/$ROS_DISTRO/setup.sh && catkin_make
 # Initialize environment
 RUN chmod +x /catkin_ws/devel/setup.sh
 RUN echo "source /catkin_ws/devel/setup.bash" >> ~/.bashrc
-RUN . /catkin_ws/devel/setup.sh
+# RUN . /catkin_ws/devel/setup.sh ## in-lined with catkin_create_pkg
 
 # Create custom messages package
 WORKDIR /catkin_ws/src
-RUN catkin_create_pkg custom_messages_pkg rospy std_msgs
+RUN . /catkin_ws/devel/setup.sh && catkin_create_pkg custom_messages_pkg rospy std_msgs
 WORKDIR /catkin_ws/src/custom_messages_pkg
 RUN rm -r src
 
@@ -61,12 +61,14 @@ WORKDIR /catkin_ws
 RUN . /opt/ros/$ROS_DISTRO/setup.sh && catkin_make
 
 # Create Master Package that will be used as container's main package
-RUN . /catkin_ws/devel/setup.sh
+# RUN . /catkin_ws/devel/setup.sh ## in-lined with catkin_create
 WORKDIR /catkin_ws/src
 
 # added custom_messages_pkg
-RUN catkin_create_pkg master_pkg rospy std_msgs custom_messages_pkg
+RUN . /catkin_ws/devel/setup.sh && catkin_create_pkg master_pkg rospy std_msgs custom_messages_pkg
 
+# You don't need to do this since you are creating the package
+# with the custom_messages_pkg.  ROS instserts to library during the setup
 # Update master_package for custom messages
 # add custom_messages_pkg to find_package() method in CMakeLists.txt file
 # FIND find_package(catkin REQUIRED COMPONENTS and insert "custom_messages_pkg" on next line
