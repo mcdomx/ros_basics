@@ -17,6 +17,6 @@ source /catkin_ws/devel/setup.bash
 
 # python /catkin_ws/src/master_pkg/src/service_server.py
 # bash -c 'rosrun master_pkg service_server.py'
-# rosrun master_pkg service_server.py
+rosrun master_pkg service_server.py
 
 echo ">>>>>>>>>>>> service server is running on master: $ROS_MASTER_URI"
