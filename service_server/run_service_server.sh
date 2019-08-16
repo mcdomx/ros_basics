@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 echo "********************************************************"
 echo "SERVICE SERVER NODE"
@@ -10,7 +10,7 @@ echo "********************************************************"
 
 while ! (rosnode list | grep rosout); do echo "waiting..."; sleep 5 ; done
 
-. ~/.bashrc
+source ~/.bashrc
 
 python /catkin_ws/src/master_pkg/src/service_server.py
 # rosrun master_pkg service_server.py
