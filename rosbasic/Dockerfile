@@ -61,6 +61,7 @@ WORKDIR /catkin_ws
 RUN . /opt/ros/$ROS_DISTRO/setup.sh && catkin_make
 
 # Create Master Package that will be used as container's main package
+RUN . /catkin_ws/devel/setup.sh
 WORKDIR /catkin_ws/src
 
 # added custom_messages_pkg
