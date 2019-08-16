@@ -62,14 +62,19 @@ RUN . /opt/ros/$ROS_DISTRO/setup.sh && catkin_make
 
 # Create Master Package that will be used as container's main package
 WORKDIR /catkin_ws/src
-RUN catkin_create_pkg master_pkg rospy std_msgs
+
+# added custom_messages_pkg
+RUN catkin_create_pkg master_pkg rospy std_msgs custom_messages_pkg
 
 # Update master_package for custom messages
 # add custom_messages_pkg to find_package() method in CMakeLists.txt file
 # FIND find_package(catkin REQUIRED COMPONENTS and insert "custom_messages_pkg" on next line
 WORKDIR /catkin_ws/src/master_pkg
-RUN sed -i '/find_package(catkin REQUIRED COMPONENTS/a \ \ custom_messages_pkg' 'CMakeLists.txt'
+RUN cat CMakeLists.txt
+RUN sed -i  '/^  std_msgs/a \ \ custom_messages_pkg' 'CMakeLists.txt'
+RUN cat CMakeLists.txt
 
-
+WORKDIR /catkin_ws
+RUN . /opt/ros/$ROS_DISTRO/setup.sh && catkin_make
 
 
