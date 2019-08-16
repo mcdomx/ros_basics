@@ -11,7 +11,7 @@ RUN apt-get install -y ros-melodic-rqt-graph
 RUN apt-get install -y ros-melodic-rqt-common-plugins
 
 # Setup base catkin environment
-RUN echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> ~/.profile
+RUN echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> ~/.bashrc
 RUN mkdir /catkin_ws && mkdir /catkin_ws/src
 # RUN mkdir /catkin_ws/src
 WORKDIR /catkin_ws
@@ -19,7 +19,7 @@ RUN . /opt/ros/$ROS_DISTRO/setup.sh && catkin_make
 
 # Initialize environment
 RUN chmod +x /catkin_ws/devel/setup.sh
-RUN echo "source /catkin_ws/devel/setup.bash" >> ~/.profile
+RUN echo "source /catkin_ws/devel/setup.bash" >> ~/.bashrc
 # RUN . /catkin_ws/devel/setup.sh ## in-lined with catkin_create_pkg
 
 # Create custom messages package
