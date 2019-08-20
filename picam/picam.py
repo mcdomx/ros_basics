@@ -1,16 +1,36 @@
 #!/usr/bin/python
 
-import rospy
-import picamera
+import cv2
+import matplotlib.pyplot as plt
+import time
 
-if __name__ == '__main__':
-        rospy.init_node('first_node')
-        rospy.loginfo("Node has been started")
+cam = "http://raspberrypi.local:8080/?action=stream"
+cap = cv2.VideoCapture(cam)
 
-        # set rate at 1000 hrz (1 milliseconds)
-        rate=rospy.Rate(1) # in milliseconds
+execution_path = os.getcwd()
 
-        # while the node is running (not shutdown)
-        while not rospy.is_shutdown():
-            rospy.loginfo("Hi")
-            rate.sleep() # this will 'pulse' the loop at the rate
+# set rate in milliseconds)
+rate=rospy.Rate(200)
+
+while not rospy.is_shutdown():
+    try:
+        # read_val is True or False
+        # cur_frame is a numpy array
+        read_val, cur_frame = cap.read()
+
+        # Display the image
+        # cv2.imshow('image', cur_frame)
+
+        # Here, we want to publish the array value
+        if read_val:
+            # publish cur_frame
+
+        # If q is pressed
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+
+        rate.sleep() # this will 'pulse' the loop at the rate
+
+    # If SIGINT is received
+    except KeyboardInterrupt:
+        cap.release()

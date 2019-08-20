@@ -6,27 +6,23 @@
 
 # NOTE: This can only be built and run on a raspberry pi
 
-# This is a test node that will create a camera package
-# that will connect to the local roscore network
-
 FROM rosbasic
 
 # Create a directory that will be shared with the host
 RUN useradd -d /home/pi -g root -G sudo -p pi pi
-RUN mkdir /docker_tmp && chown pi /docker_tmp
+RUN mkdir /picam_data && chown pi /picam_data
 
-# Create a Camera package
-# RUN apt-get update
-# RUN apt-get install -y python-pip
-# RUN pip install picamera
-# RUN apt-get update
-# RUN apt-get install python-picamera
+# Install Necessary Components and Utilities
+RUN apt-get update
+RUN apt-get install -y nano iputils-ping
+RUN apt-get install -y python python-pip
+RUN mkdir /requirements
+WORKDIR /requirements
+COPY ./requirements.txt requirements.txt
+RUN pip install requirements.txt
 
-WORKDIR /catkin_ws/src
-RUN catkin_create_pkg picam roscpp rospy std_msgs
-WORKDIR /catkin_ws
-RUN . /opt/ros/$ROS_DISTRO/setup.sh && catkin_make
-COPY picam.py /catkin_ws/src/picam/src/picam.py
+# Copy container specific files and run
+COPY picam.py /catkin_ws/src/master_pkg/src/picam.py
 
-ADD  run_picam.sh run_picam.sh
-# CMD ./run_picam.sh
+ADD  run.sh run.sh
+CMD ./run.sh
