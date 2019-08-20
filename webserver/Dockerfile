@@ -9,14 +9,17 @@ RUN apt-get -y install
 
 
 # Install OpenCV
-RUN apt-get install -y build-essential git cmake pkg-config gcc g++
-RUN apt-get install -y libjpeg62-turbo-dev libjpeg-dev libpng-dev libtiff-dev libtiff5-dev libjpeg8-dev libpng12-dev
-RUN apt-get install -y libgtk2.0-dev pkg-config
-RUN apt-get install -y python-dev python-numpy libtbb2 libtbb-dev libjasper-dev
-RUN apt-get install -y libavcodec-dev libavformat-dev libswscale-dev libv4l-dev libdc1394-22-devinstal
-RUN apt-get install -y libxvidcore-dev libx264-dev
-RUN apt-get install -y libatlas-base-dev gfortran
-RUN apt-get install -y python3-dev
+RUN apt-get install -y build-essential git cmake pkg-config gcc g++ unzip
+RUN apt-get install -y libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
+RUN apt-get install -y python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libjasper-dev libdc1394-22-dev
+
+# RUN apt-get install -y libjpeg62-turbo-dev libjpeg-dev libpng-dev libtiff-dev libtiff5-dev libjpeg8-dev libpng12-dev
+# RUN apt-get install -y libgtk2.0-dev pkg-config
+# RUN apt-get install -y python-dev python-numpy libtbb2 libtbb-dev libjasper-dev
+# RUN apt-get install -y libavcodec-dev libavformat-dev libswscale-dev libv4l-dev libdc1394-22-devinstal
+# RUN apt-get install -y libxvidcore-dev libx264-dev
+# RUN apt-get install -y libatlas-base-dev gfortran
+# RUN apt-get install -y python3-dev
 
 RUN apt-get purge -y wolfram-engine	
 
@@ -26,7 +29,7 @@ RUN unzip opencv_contrib.zip
 RUN wget https://bootstrap.pypa.io/get-pip.py
 RUN python get-pip.py
 
-RUN pip install numpy
+# RUN pip install numpy
 
 RUN cd ~/opencv-3.1.0/
 RUN mkdir build
