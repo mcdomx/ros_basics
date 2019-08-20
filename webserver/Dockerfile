@@ -8,6 +8,7 @@ RUN apt-get update
 
 # Install Additional Utilities
 RUN apt-get install -y git nano iputils-ping make cmake libjpeg8-dev gcc g++
+RUN apt-get install -y libraspberrypi-dev
 
 
 # Build mjpg_streamer
@@ -16,6 +17,9 @@ RUN git clone https://github.com/jacksonliam/mjpg-streamer.git
 
 
 WORKDIR /mjpg-streamer/mjpg-streamer-experimental
+
+RUN mkdir _build
+WORKDIR /mjpg-streamer/mjpg-streamer-experimental/_build
 
 RUN make && make install && chmod +x docker-start.sh
 
