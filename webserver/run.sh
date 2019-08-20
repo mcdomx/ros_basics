@@ -6,7 +6,7 @@ set -e
 
 export LD_LIBRARY_PATH="/mjpg-streamer/mjpg-streamer-experimental"
 
-cat pwd
+pwd
 
 ./mjpg_streamer -i 'input_raspicam.so' -o 'output_http.so -w ./www' 
 
