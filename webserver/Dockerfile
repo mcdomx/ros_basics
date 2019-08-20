@@ -3,7 +3,7 @@
 FROM openhorizon/mjpg-streamer-pi3
 
 # Install GIT
-RUN apt-get -y install git
+RUN apt-get update && apt-get -y install git
 
 # Build mjpg_streamer
 # Need to run container with the device: docker run -t -i -p 8080:8080/tcp --device=/dev/video0 image:tag
