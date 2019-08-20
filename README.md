@@ -1,7 +1,18 @@
-# ros_basics
-ROS Learning Environment
+# RaspyCam Collector
 
-This project will setup a local network of bots that can speak with each other.
+This project will use one or several Raspberry Pi units with cameras to 
+collect detected object data.  Detected object overlays can be displayed
+and the objects identfied are logged for statistical analysis.
+
+The network will require a minimum of 2 Raspberry Pi devices.  One will 
+act as a ROS Master and web server.  The other will be the iimage collection 
+unit which will use ROS to publish image data.  Each Raspberry Pi device will 
+use Dokcer images to manage its tasks.  The image collecting Pi device 
+will have a single container using ROS to capture image data and publish it.
+The ROS master Pi device will have 2 containers; one will act as the ROS Master 
+and the other will be a web server the will collect image data from each
+Raspberry Pi and stream it.
+
 
 ROS will be run inside of Dokcer containers on each of the pi devices.  Note that ROS cannot work when 
 any of the containers are running on a Mac.  Docker for Mac runs docker containers inside of a 
