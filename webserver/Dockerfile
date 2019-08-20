@@ -5,7 +5,6 @@ FROM raspbian/jessie
 
 # Install GIT
 RUN apt-get update && apt-get -y install git cmake libjpeg8-dev gcc g++
-RUN apt-get -y install opencv
 
 # Build mjpg_streamer
 # Need to run container with the device: docker run -t -i -p 8080:8080/tcp --device=/dev/video0 image:tag
