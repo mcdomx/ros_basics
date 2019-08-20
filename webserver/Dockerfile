@@ -5,7 +5,7 @@ FROM raspbian/jessie
 
 # Install Dependencies and Utilities
 RUN apt-get update
-RUN dpkg --unpack man-db
+RUN dpkg --unpack man
 RUN apt-get install -y \ 
     wget \
     build-essential \ 
