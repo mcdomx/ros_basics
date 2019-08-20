@@ -1,7 +1,7 @@
 
 # webserver
 
-# Need to run container with the device: docker run -t -i -p 8080:8080/tcp --device=/dev/video0 image:tag
+# Need to run container with the device: docker run -t -i -p 8080:8080/tcp --device=/dev/vchiq image:tag
 # The stream can be viewed: http://pidev2.local:8080/?action=stream
 # http://pidev2.local:8080 shows various html options
 
@@ -17,7 +17,7 @@ RUN git clone https://github.com/jacksonliam/mjpg-streamer.git
 WORKDIR /mjpg-streamer/mjpg-streamer-experimental
 RUN make && make install && chmod +x docker-start.sh
 
-EXPOSE 8080/TCP
+# EXPOSE 8080/TCP
 
 ENTRYPOINT ["/mjpg-streamer/mjpg-streamer-experimental/docker-start.sh", "output_http.so -w ./www"]
 CMD ["input_raspicam.so"]
