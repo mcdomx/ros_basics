@@ -7,7 +7,7 @@ FROM raspbian/jessie
 RUN apt-get update
 
 # Install Additional Utilities
-RUN apt-get install -y git nano iputils-ping make cmake
+RUN apt-get install -y git nano iputils-ping make cmake libjpeg8-dev gcc g++
 
 
 # Build mjpg_streamer
