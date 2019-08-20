@@ -10,7 +10,8 @@ RUN apt-get -y install
 
 # Install OpenCV
 RUN apt-get install -y build-essential git cmake pkg-config gcc g++ unzip
-RUN apt-get install -y libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
+RUN apt-get install -y libgtk2.0-dev pkg-config libavcodec-dev 
+RUN apt-get install -y libavformat-dev libswscale-dev
 RUN apt-get install -y python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libjasper-dev libdc1394-22-dev
 
 # RUN apt-get install -y libjpeg62-turbo-dev libjpeg-dev libpng-dev libtiff-dev libtiff5-dev libjpeg8-dev libpng12-dev
