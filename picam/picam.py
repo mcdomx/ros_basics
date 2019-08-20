@@ -12,6 +12,7 @@ execution_path = os.getcwd()
 # set rate in milliseconds)
 rate=rospy.Rate(200)
 
+i = 1
 while not rospy.is_shutdown():
     try:
         # read_val is True or False
@@ -23,6 +24,8 @@ while not rospy.is_shutdown():
 
         # Here, we want to publish the array value
         if read_val:
+            print("Publish item: ", i ,cur_frame.type())
+            i += 1
             # publish cur_frame
 
         # If q is pressed
