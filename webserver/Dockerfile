@@ -7,7 +7,7 @@ FROM raspbian/jessie
 RUN apt-get update
 
 # Install Additional Utilities
-RUN apt-get install -y nano iputils-ping
+RUN apt-get install -y git nano iputils-ping
 
 
 # Build mjpg_streamer
