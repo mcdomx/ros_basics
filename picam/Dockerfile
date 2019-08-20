@@ -16,6 +16,7 @@ RUN mkdir /picam_data && chown pi /picam_data
 RUN apt-get update
 RUN apt-get install -y nano iputils-ping
 RUN apt-get install -y python python-pip
+RUN apt-get install -y python-opencv
 RUN mkdir /requirements
 WORKDIR /requirements
 COPY ./requirements.txt requirements.txt
