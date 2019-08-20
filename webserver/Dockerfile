@@ -21,8 +21,8 @@ RUN make && make install && chmod +x docker-start.sh
 
 EXPOSE 8080/TCP
 
-ENTRYPOINT ["/mjpg-streamer/mjpg-streamer-experimental/docker-start.sh", "output_http.so -w ./www"]
-CMD ["input_raspicam.so"]
+# ENTRYPOINT ["/mjpg-streamer/mjpg-streamer-experimental/docker-start.sh", "output_http.so -w ./www"]
+# CMD ["input_raspicam.so"]
 # CMD ["/mjpg-streamer/mjpg-streamer-experimental/docker-start.sh", "output_http.so -w ./www", "input_raspicam.so"]
 
 # ADD  run.sh run.sh
