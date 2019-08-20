@@ -16,5 +16,9 @@ RUN make && make install
 
 EXPOSE 8080/TCP
 
-ADD  run.sh run.sh
-CMD ./run.sh
+ENTRYPOINT ["/mjpg-streamer/mjpg-streamer-experimental/run.sh", "output_http.so -w ./www"]
+
+CMD ["input_raspicam.so"]
+
+# ADD  run.sh run.sh
+# CMD ./run.sh
