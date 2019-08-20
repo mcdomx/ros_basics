@@ -6,7 +6,7 @@ FROM raspbian/jessie
 # Install Basics
 RUN apt-get update
 RUN apt-get install -y build-essential git cmake pkg-config gcc g++ unzip nano iputils-ping
-RUN apt-get install -n man-db
+RUN apt-get install man-db
 
 # Install OpenCV
 RUN apt-get install -y libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
