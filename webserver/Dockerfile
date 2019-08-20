@@ -3,33 +3,45 @@
 # FROM openhorizon/mjpg-streamer-pi3
 FROM raspbian/jessie
 
-# Install Basics
+# Install Dependencies and Utilities
 RUN apt-get update
-RUN apt-get install -y build-essential git cmake pkg-config gcc g++ unzip nano iputils-ping
-RUN apt-get install man-db
+RUN apt-get install -y \ 
+    wget \
+    build-essential \ 
+    cmake \ 
+    git \
+    unzip \ 
+    pkg-config \
+    python-dev \ 
+    python-opencv \ 
+    libopencv-dev \ 
+    libav-tools  \ 
+    libjpeg-dev \ 
+    libpng-dev \ 
+    libtiff-dev \ 
+    libjasper-dev \ 
+    libgtk2.0-dev \ 
+    python-numpy \ 
+    python-pycurl \ 
+    libatlas-base-dev \
+    gfortran \
+    webp \ 
+    python-opencv \ 
+    qt5-default \
+    libvtk6-dev \ 
+    zlib1g-dev 
 
-# Install OpenCV
-RUN apt-get install -y libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
-RUN apt-get install -y python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libjasper-dev libdc1394-22-dev
+# Install Additional Utilities
+RUN apt-get install -y nano iputils-ping
 
-# RUN apt-get install -y libjpeg62-turbo-dev libjpeg-dev libpng-dev libtiff-dev libtiff5-dev libjpeg8-dev libpng12-dev
-# RUN apt-get install -y libgtk2.0-dev pkg-config
-# RUN apt-get install -y python-dev python-numpy libtbb2 libtbb-dev libjasper-dev
-# RUN apt-get install -y libavcodec-dev libavformat-dev libswscale-dev libv4l-dev libdc1394-22-devinstal
-# RUN apt-get install -y libxvidcore-dev libx264-dev
-# RUN apt-get install -y libatlas-base-dev gfortran
-# RUN apt-get install -y python3-dev
+
 
 RUN apt-get purge -y wolfram-engine	
 
+
+# Install OpenCV
 RUN wget -O opencv_contrib.zip https://github.com/Itseez/opencv_contrib/archive/3.1.0.zip
-RUN unzip opencv_contrib.zip
-
-RUN wget https://bootstrap.pypa.io/get-pip.py
-RUN python get-pip.py
-
-# RUN pip install numpy
-
+RUN unzip opencv_contrib.zip && rm opencv_contrib.zip
 RUN cd ~/opencv-3.1.0/
 RUN mkdir build
 RUN cd build
@@ -38,9 +50,7 @@ RUN cmake -D CMAKE_BUILD_TYPE=RELEASE \
     -D INSTALL_PYTHON_EXAMPLES=ON \
     -D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib-3.1.0/modules \
     -D BUILD_EXAMPLES=ON ..
-RUN make -j4
-RUN make install
-RUN ldconfig
+RUN make -j4 && make install && ldconfig
 
 
 # Build mjpg_streamer
