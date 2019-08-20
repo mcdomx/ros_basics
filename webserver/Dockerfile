@@ -5,6 +5,7 @@ FROM raspbian/jessie
 
 # Install Dependencies and Utilities
 RUN apt-get update
+RUN dpkg --unpack man-db
 RUN apt-get install -y \ 
     wget \
     build-essential \ 
@@ -34,8 +35,6 @@ RUN apt-get install -y \
 # Install Additional Utilities
 RUN apt-get install -y nano iputils-ping
 
-
-
 RUN apt-get purge -y wolfram-engine	
 
 
@@ -52,6 +51,9 @@ RUN cmake -D CMAKE_BUILD_TYPE=RELEASE \
     -D BUILD_EXAMPLES=ON ..
 RUN make -j4 && make install && ldconfig
 
+RUN mkdir /requirements
+COPY requirements.txt /requirements
+RUN pip install --no-cache-dir -r /requirements/requirements.txt
 
 # Build mjpg_streamer
 # Need to run container with the device: docker run -t -i -p 8080:8080/tcp --device=/dev/video0 image:tag
