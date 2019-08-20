@@ -21,6 +21,7 @@ WORKDIR /mjpg-streamer/mjpg-streamer-experimental
 RUN mkdir _build
 WORKDIR /mjpg-streamer/mjpg-streamer-experimental/_build
 
+WORKDIR /mjpg-streamer/mjpg-streamer-experimental
 RUN make && make install && chmod +x docker-start.sh
 
 EXPOSE 8080/TCP
