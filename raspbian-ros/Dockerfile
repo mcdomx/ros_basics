@@ -27,7 +27,8 @@ RUN apt-get install -y python-rosdep
 RUN apt-get install -y python-rosinstall-generator
 RUN apt-get install -y python-wstool
 RUN apt-get install -y python-rosinstall 
-RUN apt-get install -y build-essential && cmake
+RUN apt-get install -y build-essential 
+RUN apt-get install -y cmake
 
 RUN rosdep init
 RUN rosdep update
@@ -48,7 +49,8 @@ RUN rosdep install -y --from-paths src --ignore-src --rosdistro $ROS_VERSION -r 
 
 
 # Install ROS Support Tools and Utilities
-RUN apt-get install -y nano iputils-ping
+RUN apt-get install -y nano 
+RUN apt-get install -y iputils-ping
 # RUN apt-get install -y libraspberrypi-dev
 
 # RUN apt-get install -y ros-melodic-rqt
