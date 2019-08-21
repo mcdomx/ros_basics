@@ -50,11 +50,11 @@ RUN wget http://sourceforge.net/projects/assimp/files/assimp-3.1/assimp-3.1.1_no
 RUN unzip assimp-3.1.1_no_test_models.zip
 WORKDIR assimp-3.1.1
 RUN cmake .
-RUN make
+RUN make -s
 RUN make install
 
 
-
+WORKDIR /catkin_ws
 
 RUN rosdep install -y --from-paths src --ignore-src --rosdistro $ROS_VERSION -r --os=debian:$DEBIAN_VERSION
 
