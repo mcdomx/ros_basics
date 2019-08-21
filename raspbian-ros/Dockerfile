@@ -69,7 +69,7 @@ RUN apt-get install -y python-catkin-pkg
 
 # This can be commented out and use catkin_make instead
 # catkin_isolated_make allows non-catkin packages to be built
-RUN ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/$ROS_VERSION -j2
+# RUN ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/$ROS_VERSION -j2
 
 ### END OF WEB PAGE INSTRUCTIONS
 
@@ -133,7 +133,7 @@ RUN sed -i '/<!-- custom_messages -->/r msg_dependencies' 'package.xml'
 
 # Re-Build Package
 WORKDIR /catkin_ws
-RUN . /opt/ros/$ROS_VERSION/setup.sh && catkin_make
+RUN . /opt/ros/$ROS_VERSION/setup.sh && catkin_make -j2
 
 # Create Master Package that will be used as container's main package
 # RUN . /catkin_ws/devel/setup.sh ## in-lined with catkin_create
