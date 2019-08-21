@@ -12,9 +12,10 @@ ARG ROS_VERSION
 # https://wiki.ros.org/ROSberryPi/Installing%20ROS%20Kinetic%20on%20the%20Raspberry%20Pi
 
 RUN apt-get update
-RUN apt-get upgrade -y
 
 RUN sudo apt-get install dirmngr
+
+RUN apt-get upgrade -y
 
 RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $DEBIAN_VERSION main" > /etc/apt/sources.list.d/ros-latest.list'
 
