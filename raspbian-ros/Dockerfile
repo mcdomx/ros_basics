@@ -43,6 +43,7 @@ RUN wstool init src $ROS_VERSION-ros_comm-wet.rosinstall
 RUN rm -r $ROS_VERSION-ros_comm-wet.rosinstall
 
 # Install Dependencies
+RUN apt-get install -y unzip
 RUN mkdir -p /catkin_ws/external_src
 WORKDIR /catkin_ws/external_src
 RUN wget http://sourceforge.net/projects/assimp/files/assimp-3.1/assimp-3.1.1_no_test_models.zip/download -O assimp-3.1.1_no_test_models.zip
