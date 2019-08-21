@@ -61,7 +61,7 @@ RUN apt-get install -y iputils-ping
 RUN echo "source /opt/ros/$ROS_VERSION/setup.bash" >> ~/.bashrc
 # RUN mkdir /catkin_ws/src
 WORKDIR /catkin_ws
-RUN . /opt/ros/$ROS_DISTRO/setup.sh && catkin_make
+RUN . /opt/ros/$ROS_VERSION/setup.sh && catkin_make
 
 # Initialize environment
 RUN chmod +x /catkin_ws/devel/setup.sh
