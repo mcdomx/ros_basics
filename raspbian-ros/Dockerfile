@@ -22,8 +22,8 @@ RUN apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-keys 421C
 
 
 
-
-RUN apt-get install -y python-rosdep libpaper1-
+RUN apt-get install -y python-rosdep
+# RUN apt-get install -y python-rosdep libpaper1-
 RUN apt-get install -y python-rosinstall-generator && python-wstool && python-rosinstall 
 RUN apt-get install -y build-essential && cmake
 
