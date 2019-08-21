@@ -6,7 +6,7 @@
 
 # NOTE: This can only be built and run on a raspberry pi
 
-FROM rosbasic
+FROM raspbian-ros
 
 # Create a directory that will be shared with the host
 RUN useradd -d /home/pi -g root -G sudo -p pi pi
