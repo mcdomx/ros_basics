@@ -66,14 +66,10 @@ RUN apt-get update
 RUN apt-get install -y python-catkin-pkg
 
 
-
-# This can be commented out and use catkin_make instead
 # catkin_isolated_make allows non-catkin packages to be built
-# RUN ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/$ROS_VERSION -j2
+RUN ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/$ROS_VERSION -j2
 
 ### END OF WEB PAGE INSTRUCTIONS
-
-
 
 
 # Install ROS Support Tools and Utilities
@@ -86,13 +82,10 @@ RUN apt-get install -y iputils-ping
 # RUN apt-get install -y ros-melodic-rqt-common-plugins
 
 # Setup base catkin environment
-WORKDIR /opt/ros
-RUN ls -la
 RUN echo "source /opt/ros/$ROS_VERSION/setup.bash" >> ~/.bashrc
 # RUN mkdir /catkin_ws/src
 WORKDIR /catkin_ws
 
-# Here, catkin_make instead of catkin_make_isolated ; use one or the other
 RUN . /opt/ros/$ROS_VERSION/setup.sh && catkin_make -j2
 
 # Initialize environment
