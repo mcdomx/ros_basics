@@ -18,8 +18,8 @@ RUN apt-get install -y nano iputils-ping
 RUN apt-get install -y python python-pip
 RUN apt-get install -y python-opencv
 RUN mkdir ~/requirements
-RUN pwd
 WORKDIR ~/requirements
+RUN pwd
 COPY requirements.txt requirements.txt
 RUN pip install --no-cache -r ~/requirements.txt
 
