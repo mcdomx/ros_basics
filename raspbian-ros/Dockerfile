@@ -67,15 +67,13 @@ RUN apt-get install -y python-catkin-pkg
 
 
 
-
+# This can be commented out and use catkin_make instead
+# catkin_isolated_make allows non-catkin packages to be built
 RUN ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/$ROS_VERSION -j2
 
 ### END OF WEB PAGE INSTRUCTIONS
 
-## THIS IS A LOGICAL END TO THE ROS BASIC IMAGE - FOR ROSCORE
 
-
-## THE ITEMS BELOW ARE FOR ROS CONTAINERS WITH PACKAGES
 
 
 # Install ROS Support Tools and Utilities
@@ -91,6 +89,8 @@ RUN apt-get install -y iputils-ping
 RUN echo "source /opt/ros/$ROS_VERSION/setup.bash" >> ~/.bashrc
 # RUN mkdir /catkin_ws/src
 WORKDIR /catkin_ws
+
+# Here, catkin_make instead of catkin_make_isolated ; use one or the other
 RUN . /opt/ros/$ROS_VERSION/setup.sh && catkin_make -j2
 
 # Initialize environment
@@ -133,7 +133,7 @@ RUN sed -i '/<!-- custom_messages -->/r msg_dependencies' 'package.xml'
 
 # Re-Build Package
 WORKDIR /catkin_ws
-RUN . /opt/ros/$ROS_DISTRO/setup.sh && catkin_make
+RUN . /opt/ros/$ROS_VERSION/setup.sh && catkin_make
 
 # Create Master Package that will be used as container's main package
 # RUN . /catkin_ws/devel/setup.sh ## in-lined with catkin_create
@@ -141,7 +141,7 @@ WORKDIR /catkin_ws/src
 
 # added custom_messages_pkg
 RUN . /catkin_ws/devel/setup.sh && catkin_create_pkg master_pkg rospy std_msgs custom_messages_pkg
-# RUN echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> ~/.bashrc
+# RUN echo "source /opt/ros/$ROS_VERSION/setup.bash" >> ~/.bashrc
 
 # You don't need to do this since you are creating the package
 # with the custom_messages_pkg.  ROS instserts to library during the setup
@@ -152,6 +152,6 @@ RUN . /catkin_ws/devel/setup.sh && catkin_create_pkg master_pkg rospy std_msgs c
 # RUN sed -i  '/^  std_msgs/a \ \ custom_messages_pkg' 'CMakeLists.txt'
 
 WORKDIR /catkin_ws
-RUN . /opt/ros/$ROS_DISTRO/setup.sh && catkin_make
+RUN . /opt/ros/$ROS_VERSION/setup.sh && catkin_make
 
 
