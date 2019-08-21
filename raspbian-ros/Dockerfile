@@ -73,7 +73,7 @@ RUN apt-get install -y dpkg
 
 
 #RUN dpkg -i python-catkin-pkg
-RUN dpkg -i dpkg -i python3-catkin-pkg-modules_0.4.5-1_all.deb
+RUN dpkg -i python3-catkin-pkg-modules_0.4.5-1_all.deb
 
 
 
