@@ -39,7 +39,7 @@ WORKDIR /catkin_ws
 RUN rosinstall_generator ros_comm --rosdistro $ROS_VERSION --deps --wet-only --exclude collada_parser --tar > $ROS_VERSION-ros_comm-wet.rosinstall
 
 RUN wstool init src $ROS_VERSION-ros_comm-wet.rosinstall
-/Users/markmcdonald/Desktop/mcdomx.github.io/index.html
+
 RUN rm -r $ROS_VERSION-ros_comm-wet.rosinstall
 
 # Install Dependencies
