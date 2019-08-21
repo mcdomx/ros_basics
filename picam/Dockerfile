@@ -20,7 +20,7 @@ RUN apt-get install -y python-opencv
 RUN mkdir /requirements
 WORKDIR /requirements
 COPY requirements.txt requirements.txt
-RUN pip install --no-cache -r /requirements.txt
+RUN pip install --no-cache -r requirements.txt
 
 
 # Copy container specific files and run
