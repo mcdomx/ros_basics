@@ -39,13 +39,16 @@ RUN wget -O opencv_contrib.zip https://github.com/Itseez/opencv_contrib/archive/
 RUN unzip opencv_contrib.zip
 RUN rm -r opencv_contrib.zip
 
+RUN pwd
+RUN ls -la
+
 WORKDIR /opencv/opencv-3.3.0
 RUN mkdir build
 WORKDIR build
 RUN cmake -D CMAKE_BUILD_TYPE=RELEASE \
     -D CMAKE_INSTALL_PREFIX=/usr/local \
     -D INSTALL_PYTHON_EXAMPLES=ON \
-    -D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib-3.3.0/modules \
+    -D OPENCV_EXTRA_MODULES_PATH=/opencv/opencv_contrib-3.3.0/modules \
     -D BUILD_EXAMPLES=ON ..
 RUN make -j2
 RUN make install
