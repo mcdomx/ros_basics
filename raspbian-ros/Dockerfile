@@ -36,7 +36,7 @@ RUN rosdep update
 RUN mkdir /catkin_ws
 WORKDIR /catkin_ws
 
-RUN rosinstall_generator ros_comm --rosdistro $ROS_VERSION --deps --wet-only --tar > $ROS_VERSION-ros_comm-wet.rosinstall
+RUN rosinstall_generator ros_comm --rosdistro $ROS_VERSION --deps --wet-only --exclude collada_parser --tar > $ROS_VERSION-ros_comm-wet.rosinstall
 
 RUN wstool init src $ROS_VERSION-ros_comm-wet.rosinstall
 
