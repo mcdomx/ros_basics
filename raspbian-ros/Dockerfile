@@ -39,10 +39,11 @@ WORKDIR /catkin_ws
 RUN rosinstall_generator ros_comm --rosdistro $ROS_VERSION --deps --wet-only --exclude collada_parser --tar > $ROS_VERSION-ros_comm-wet.rosinstall
 
 RUN wstool init src $ROS_VERSION-ros_comm-wet.rosinstall
-
+/Users/markmcdonald/Desktop/mcdomx.github.io/index.html
 RUN rm -r $ROS_VERSION-ros_comm-wet.rosinstall
 
 # Install Dependencies
+# This didn't prove to make a difference
 RUN apt-get install -y unzip
 RUN mkdir -p /catkin_ws/external_src
 WORKDIR /catkin_ws/external_src
@@ -60,29 +61,21 @@ RUN rosdep install -y --from-paths src --ignore-src --rosdistro $ROS_VERSION -r 
 
 
 
-
-
-
-
-
-
-
-
 # build catkin workspace
-# RUN apt-get install -y dpkg
-
 RUN apt-get update
 RUN apt-get install -y python-catkin-pkg
 
 
 
 
-
-
-
-RUN ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/$ROS_VERSION
+RUN ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/$ROS_VERSION -j2
 
 ### END OF WEB PAGE INSTRUCTIONS
+
+## THIS IS A LOGICAL END TO THE ROS BASIC IMAGE - FOR ROSCORE
+
+
+## THE ITEMS BELOW ARE FOR ROS CONTAINERS WITH PACKAGES
 
 
 # Install ROS Support Tools and Utilities
