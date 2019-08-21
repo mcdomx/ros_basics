@@ -1,7 +1,7 @@
 
 # webserver
 
-# Need to run container with the device: docker run -t -i -p 8080:8080/tcp --device=/dev/vchiq image:tag
+# Need to run container with the device: docker run -t -i -p 8080:8080/tcp --device=/dev/vchiq webserver
 # The stream can be viewed: http://pidev2.local:8080/?action=stream
 # http://pidev2.local:8080 shows various html options
 

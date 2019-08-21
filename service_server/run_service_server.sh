@@ -12,7 +12,7 @@ echo "********************************************************"
 
 while ! (rosnode list | grep rosout); do echo "waiting..."; sleep 5 ; done
 
-# not sure if I need this - need to use bash to run /bin/bash
+# Set environment to execute ROS commands
 source /catkin_ws/devel/setup.bash
 
 # python /catkin_ws/src/master_pkg/src/service_server.py
