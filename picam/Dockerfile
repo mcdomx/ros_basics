@@ -27,6 +27,5 @@ RUN pip install --no-cache -r requirements.txt
 COPY picam.py /catkin_ws/src/master_pkg/src/picam.py
 
 WORKDIR /
-RUN pwd
 COPY  run.sh run.sh
 CMD ./run.sh

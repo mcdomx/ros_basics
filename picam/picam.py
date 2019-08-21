@@ -4,11 +4,15 @@ import cv2
 import matplotlib.pyplot as plt
 import time
 import os
+import picamera
+import picamera.array
 
-cam = "http://pidev1.local:8080/?action=stream"
-cap = cv2.VideoCapture(cam)
+# cam = "http://pidev1.local:8080/?action=stream"
+# cap = cv2.VideoCapture(cam)
 
-execution_path = os.getcwd()
+# execution_path = os.getcwd()
+
+
 
 # set rate in milliseconds)
 rate=rospy.Rate(200)
@@ -16,16 +20,14 @@ rate=rospy.Rate(200)
 i = 1
 while not rospy.is_shutdown():
     try:
-        # read_val is True or False
-        # cur_frame is a numpy array
-        read_val, cur_frame = cap.read()
-
-        # Display the image
-        # cv2.imshow('image', cur_frame)
 
         # Here, we want to publish the array value
         if read_val:
-            print("Publish item: ", i ,cur_frame.type())
+            with picamera.PiCamera() as camera:
+                with picamera.array.PiRGBArray(camera) as output:
+                    camera.capture(output, 'rgb')
+                    print('Captured %dx%dx%d image' % (
+                            output.array.shape[0], output.array.shape[1], output.array.shape[1]))
             i += 1
             # publish cur_frame
 
