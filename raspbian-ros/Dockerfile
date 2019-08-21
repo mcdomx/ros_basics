@@ -17,7 +17,12 @@ RUN apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-keys 421C
 RUN apt-get update
 RUN apt-get upgrade -y
 
-RUN apt-get install -y python-rosdep python-rosinstall-generator python-wstool python-rosinstall build-essential cmake
+RUN apt-get install -y python-rosdep 
+RUN apt-get install -y python-rosinstall-generator 
+RUN apt-get install -y python-wstool 
+RUN apt-get install -y python-rosinstall 
+RUN apt-get install -y build-essential 
+RUN apt-get install -y cmake
 
 RUN rosdep init
 RUN rosdep update
