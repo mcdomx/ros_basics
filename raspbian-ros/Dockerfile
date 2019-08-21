@@ -14,7 +14,7 @@ ARG ROS_VERSION
 RUN apt-get update
 RUN apt-get upgrade -y
 
-# RUN sudo apt-get install dirmngr
+RUN sudo apt-get install -y dirmngr
 
 RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $DEBIAN_VERSION main" > /etc/apt/sources.list.d/ros-latest.list'
 
