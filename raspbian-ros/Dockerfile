@@ -11,6 +11,9 @@ ARG ROS_VERSION
 # Install ROS
 # https://wiki.ros.org/ROSberryPi/Installing%20ROS%20Kinetic%20on%20the%20Raspberry%20Pi
 
+RUN apt-get update
+RUN apt-get upgrade -y
+
 RUN sudo apt-get install dirmngr
 
 RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $DEBIAN_VERSION main" > /etc/apt/sources.list.d/ros-latest.list'
@@ -18,8 +21,7 @@ RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $DEBIAN_VERSION main" > 
 RUN apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-keys 421C365BD9FF1F717815A3895523BAEEB01FA116 F42ED6FBAB17C654
 
 
-RUN apt-get update
-RUN apt-get upgrade -y
+
 
 RUN apt-get install -y python-rosdep libpaper1-
 RUN apt-get install -y python-rosinstall-generator && python-wstool && python-rosinstall 
