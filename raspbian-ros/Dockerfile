@@ -59,9 +59,10 @@ WORKDIR /catkin_ws
 RUN rosdep install -y --from-paths src --ignore-src --rosdistro $ROS_VERSION -r --os=debian:$DEBIAN_VERSION
 
 # build catkin workspace
-# RUN apt-get install -y python-pip
+RUN apt-get install -y dpkg
 
-RUN apt install -y --reinstall python-catkin-pkg python-catkin-pkg-modules
+RUN dpkg -i python-catkin-pkg
+RUN dpkg -i python-catkin-pkg-modules
 
 RUN ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/$ROS_VERSION
 
