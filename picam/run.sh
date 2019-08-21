@@ -9,10 +9,10 @@ echo "ROS_HOSTNAME: $ROS_HOSTNAME"
 echo "ROS_IP: $ROS_IP"
 echo "********************************************************"
 
-while ! (rosnode list | grep rosout); do echo "waiting..."; sleep 5 ; done
-
 # Set environment to execute ROS commands
 source /catkin_ws/devel/setup.bash
+
+while ! (rosnode list | grep rosout); do echo "waiting..."; sleep 5 ; done
 
 # Start picam
 # python /catkin_ws/src/master_pkg/src/picam.py

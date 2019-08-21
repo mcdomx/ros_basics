@@ -3,6 +3,8 @@
 # -v ~/dokcer_tmp:/catkin_ws/src/picam/src -w /catkin_ws/src/picam/src
 # docker run -it --rm --name picam --env ROS_MASTER_URI=http://$LOCALIP:11311/  -e DISPLAY=$LOCALIP:0 -v /tmp/.X11-unix:/tmp/.X11-unix:ro -v ~/dokcer_tmp:/dokcer_tmp -w /catkin_ws/src/picam/src picam /bin/bash
 
+# docker run --rm --name picam --env ROS_MASTER_URI=http://10.0.1.4:11311 -e ROS_HOSTNAME=10.0.1.4  --tty=True --net=host picam
+
 
 # NOTE: This can only be built and run on a raspberry pi
 
