@@ -17,7 +17,7 @@ RUN apt-get update
 RUN apt-get install -y nano iputils-ping
 RUN apt-get install -y python3 python3-pip
 RUN apt-get install -y python3-opencv
-RUN apt-get install -y python3-picamera
+RUN apt-get install -y python-picamera
 RUN mkdir /requirements
 WORKDIR /requirements
 COPY requirements.txt requirements.txt
