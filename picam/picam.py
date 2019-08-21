@@ -20,16 +20,14 @@ rate=rospy.Rate(200)
 i = 1
 while not rospy.is_shutdown():
     try:
-
         # Here, we want to publish the array value
-        if read_val:
-            with picamera.PiCamera() as camera:
-                with picamera.array.PiRGBArray(camera) as output:
-                    camera.capture(output, 'rgb')
-                    print('Captured %dx%dx%d image' % (
-                            output.array.shape[0], output.array.shape[1], output.array.shape[1]))
-            i += 1
-            # publish cur_frame
+        with picamera.PiCamera() as camera:
+            with picamera.array.PiRGBArray(camera) as output:
+                camera.capture(output, 'rgb')
+                print('Captured %dx%dx%d image' % (
+                        output.array.shape[0], output.array.shape[1], output.array.shape[1]))
+        i += 1
+        # publish cur_frame
 
         # If q is pressed
         if cv2.waitKey(1) & 0xFF == ord('q'):
