@@ -3,8 +3,9 @@
 import cv2
 import matplotlib.pyplot as plt
 import time
+import os
 
-cam = "http://raspberrypi.local:8080/?action=stream"
+cam = "http://pidev1.local:8080/?action=stream"
 cap = cv2.VideoCapture(cam)
 
 execution_path = os.getcwd()
