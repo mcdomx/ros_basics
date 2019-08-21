@@ -43,10 +43,22 @@ RUN wstool init src $ROS_VERSION-ros_comm-wet.rosinstall
 RUN rm -r $ROS_VERSION-ros_comm-wet.rosinstall
 
 # Install Dependencies
+# RUN mkdir -p /catkin_ws/external_src
+# WORKDIR /catkin_ws/external_src
+# RUN wget http://sourceforge.net/projects/assimp/files/assimp-3.1/assimp-3.1.1_no_test_models.zip/download -O assimp-3.1.1_no_test_models.zip
+# RUN unzip assimp-3.1.1_no_test_models.zip
+# WORKSPACE assimp-3.1.1
+# RUN cmake .
+# RUN make
+# RUN make install
+
+
+
+
 RUN rosdep install -y --from-paths src --ignore-src --rosdistro $ROS_VERSION -r --os=debian:$DEBIAN_VERSION
 
 # build catkin workspace
-RUN sudo ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/$ROS_VERSION
+RUN ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/$ROS_VERSION
 
 ### END OF WEB PAGE INSTRUCTIONS
 
