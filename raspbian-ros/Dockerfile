@@ -1,15 +1,19 @@
-# raspbian-ros image
+# raspbian-ros image Debian: stretch // ROS: kinetic
 
 # used as the template image for building ros containers
 
-FROM raspbian/jessie
-
-
+ARG DEBIAN_VERSION=stretch
+ARG ROS_VERSION=kinetic
+FROM raspbian/$DEBIAN_VERSION
+ARG DEBIAN_VERSION
+ARG ROS_VERSION
 
 # Install ROS
 # https://wiki.ros.org/ROSberryPi/Installing%20ROS%20Kinetic%20on%20the%20Raspberry%20Pi
 
-RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu jessie main" > /etc/apt/sources.list.d/ros-latest.list'
+RUN sudo apt-get install dirmngr
+
+RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $DEBIAN_VERSION main" > /etc/apt/sources.list.d/ros-latest.list'
 
 RUN apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-keys 421C365BD9FF1F717815A3895523BAEEB01FA116 F42ED6FBAB17C654
 
@@ -18,11 +22,8 @@ RUN apt-get update
 RUN apt-get upgrade -y
 
 RUN apt-get install -y python-rosdep libpaper1-
-RUN apt-get install -y python-rosinstall-generator 
-RUN apt-get install -y python-wstool 
-RUN apt-get install -y python-rosinstall 
-RUN apt-get install -y build-essential 
-RUN apt-get install -y cmake
+RUN apt-get install -y python-rosinstall-generator && python-wstool && python-rosinstall 
+RUN apt-get install -y build-essential && cmake
 
 RUN rosdep init
 RUN rosdep update
@@ -30,12 +31,14 @@ RUN rosdep update
 RUN mkdir /catkin_ws
 WORKDIR /catkin_ws
 
-RUN rosinstall_generator ros_comm --rosdistro kinetic --deps --wet-only --tar > kinetic-ros_comm-wet.rosinstall
+RUN rosinstall_generator ros_comm --rosdistro $ROS_VERSION --deps --wet-only --tar > $ROS_VERSION-ros_comm-wet.rosinstall
 
-RUN wstool init src kinetic-ros_comm-wet.rosinstall
+RUN wstool init src $ROS_VERSION-ros_comm-wet.rosinstall
+
+RUN rm -r $ROS_VERSION-ros_comm-wet.rosinstall
 
 # Install Dependencies
-RUN rosdep install -y --from-paths src --ignore-src --rosdistro kinetic -r --os=debian:buster
+RUN rosdep install -y --from-paths src --ignore-src --rosdistro $ROS_VERSION -r --os=debian:$DEBIAN_VERSION
 
 ### END OF WEB PAGE INSTRUCTIONS
 
