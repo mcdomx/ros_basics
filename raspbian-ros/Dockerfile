@@ -17,7 +17,7 @@ RUN apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-keys 421C
 RUN apt-get update
 RUN apt-get upgrade -y
 
-RUN apt-get install -y python-rosdep 
+RUN apt-get install -y python-rosdep libpaper1-
 RUN apt-get install -y python-rosinstall-generator 
 RUN apt-get install -y python-wstool 
 RUN apt-get install -y python-rosinstall 
