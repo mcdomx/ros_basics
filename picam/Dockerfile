@@ -22,8 +22,9 @@ WORKDIR /requirements
 COPY ./requirements.txt requirements.txt
 RUN pip install --no-cache -r requirements.txt
 
+
 # Copy container specific files and run
 COPY picam.py /catkin_ws/src/master_pkg/src/picam.py
 
-ADD  run.sh run.sh
+COPY  run.sh /run.sh
 CMD ./run.sh
