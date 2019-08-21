@@ -86,6 +86,8 @@ RUN apt-get install -y iputils-ping
 # RUN apt-get install -y ros-melodic-rqt-common-plugins
 
 # Setup base catkin environment
+WORKDIR /opt/ros
+RUN ls -la
 RUN echo "source /opt/ros/$ROS_VERSION/setup.bash" >> ~/.bashrc
 # RUN mkdir /catkin_ws/src
 WORKDIR /catkin_ws
