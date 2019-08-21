@@ -2,11 +2,11 @@
 
 # used as the template image for building ros containers
 
-ARG DEBIAN_VERSION=stretch
-ARG ROS_VERSION=kinetic
-FROM raspbian/$DEBIAN_VERSION
-ARG DEBIAN_VERSION
-ARG ROS_VERSION
+ARG DEBIAN_DISTRO=stretch
+ARG ROS_DISTRO=kinetic
+FROM raspbian/$DEBIAN_DISTRO
+ARG DEBIAN_DISTRO
+ARG ROS_DISTRO
 
 # Install ROS
 # https://wiki.ros.org/ROSberryPi/Installing%20ROS%20Kinetic%20on%20the%20Raspberry%20Pi
@@ -16,7 +16,7 @@ RUN apt-get upgrade -y
 
 RUN sudo apt-get install -y dirmngr
 
-RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $DEBIAN_VERSION main" > /etc/apt/sources.list.d/ros-latest.list'
+RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $DEBIAN_DISTRO main" > /etc/apt/sources.list.d/ros-latest.list'
 
 RUN apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-keys 421C365BD9FF1F717815A3895523BAEEB01FA116 F42ED6FBAB17C654
 
@@ -36,11 +36,11 @@ RUN rosdep update
 RUN mkdir /catkin_ws
 WORKDIR /catkin_ws
 
-RUN rosinstall_generator ros_comm --rosdistro $ROS_VERSION --deps --wet-only --exclude collada_parser --tar > $ROS_VERSION-ros_comm-wet.rosinstall
+RUN rosinstall_generator ros_comm --rosdistro $ROS_DISTRO --deps --wet-only --exclude collada_parser --tar > $ROS_DISTRO-ros_comm-wet.rosinstall
 
-RUN wstool init src $ROS_VERSION-ros_comm-wet.rosinstall
+RUN wstool init src $ROS_DISTRO-ros_comm-wet.rosinstall
 
-RUN rm -r $ROS_VERSION-ros_comm-wet.rosinstall
+RUN rm -r $ROS_DISTRO-ros_comm-wet.rosinstall
 
 # Install Dependencies
 # This didn't prove to make a difference
@@ -57,7 +57,7 @@ RUN make install
 
 WORKDIR /catkin_ws
 
-RUN rosdep install -y --from-paths src --ignore-src --rosdistro $ROS_VERSION -r --os=debian:$DEBIAN_VERSION
+RUN rosdep install -y --from-paths src --ignore-src --rosdistro $ROS_DISTRO -r --os=debian:$DEBIAN_DISTRO
 
 
 
@@ -67,7 +67,7 @@ RUN apt-get install -y python-catkin-pkg
 
 
 # catkin_isolated_make allows non-catkin packages to be built
-RUN ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/$ROS_VERSION -j2
+RUN ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/$ROS_DISTRO -j2
 
 ### END OF WEB PAGE INSTRUCTIONS
 
@@ -82,11 +82,11 @@ RUN apt-get install -y iputils-ping
 # RUN apt-get install -y ros-melodic-rqt-common-plugins
 
 # Setup base catkin environment
-RUN echo "source /opt/ros/$ROS_VERSION/setup.bash" >> ~/.bashrc
+RUN echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> ~/.bashrc
 # RUN mkdir /catkin_ws/src
 WORKDIR /catkin_ws
 
-RUN . /opt/ros/$ROS_VERSION/setup.sh && catkin_make -j2
+RUN . /opt/ros/$ROS_DISTRO/setup.sh && catkin_make -j2
 
 # Initialize environment
 RUN chmod +x /catkin_ws/devel/setup.sh
@@ -128,7 +128,7 @@ RUN sed -i '/<!-- custom_messages -->/r msg_dependencies' 'package.xml'
 
 # Re-Build Package
 WORKDIR /catkin_ws
-RUN . /opt/ros/$ROS_VERSION/setup.sh && catkin_make -j2
+RUN . /opt/ros/$ROS_DISTRO/setup.sh && catkin_make -j2
 
 # Create Master Package that will be used as container's main package
 # RUN . /catkin_ws/devel/setup.sh ## in-lined with catkin_create
@@ -136,7 +136,7 @@ WORKDIR /catkin_ws/src
 
 # added custom_messages_pkg
 RUN . /catkin_ws/devel/setup.sh && catkin_create_pkg master_pkg rospy std_msgs custom_messages_pkg
-# RUN echo "source /opt/ros/$ROS_VERSION/setup.bash" >> ~/.bashrc
+# RUN echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> ~/.bashrc
 
 # You don't need to do this since you are creating the package
 # with the custom_messages_pkg.  ROS instserts to library during the setup
@@ -147,6 +147,6 @@ RUN . /catkin_ws/devel/setup.sh && catkin_create_pkg master_pkg rospy std_msgs c
 # RUN sed -i  '/^  std_msgs/a \ \ custom_messages_pkg' 'CMakeLists.txt'
 
 WORKDIR /catkin_ws
-RUN . /opt/ros/$ROS_VERSION/setup.sh && catkin_make
+RUN . /opt/ros/$ROS_DISTRO/setup.sh && catkin_make
 
 
