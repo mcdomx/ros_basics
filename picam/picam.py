@@ -23,12 +23,17 @@ if __name__ == '__main__':
     i = 1
     while not rospy.is_shutdown():
         try:
+            camera = picamera.PiCamera()
+            output = picamera.array.PiRGBArray(camera)
+            camera.capture(output, 'rgb')
+            print('Captured %dx%dx%d image' % (
+                    output.array.shape[0], output.array.shape[1], output.array.shape[1]))
             # Here, we want to publish the array value
-            with picamera.PiCamera() as camera:
-                with picamera.array.PiRGBArray(camera) as output:
-                    camera.capture(output, 'rgb')
-                    print('Captured %dx%dx%d image' % (
-                            output.array.shape[0], output.array.shape[1], output.array.shape[1]))
+            # with picamera.PiCamera() as camera:
+            #     with picamera.array.PiRGBArray(camera) as output:
+            #         camera.capture(output, 'rgb')
+            #         print('Captured %dx%dx%d image' % (
+            #                 output.array.shape[0], output.array.shape[1], output.array.shape[1]))
             i += 1
             # publish cur_frame
 

@@ -83,7 +83,7 @@ On pidev1
 On pidev2
 	
 	for picam:
-	docker run --rm --name picam --env ROS_MASTER_URI=http://10.0.1.4:11311 -e ROS_HOSTNAME=10.0.1.27  --tty=True --net=host picam
+	docker run --rm --name picam --env ROS_MASTER_URI=http://10.0.1.4:11311 -e ROS_HOSTNAME=10.0.1.27  --tty=True --device /dev/vchiq --net=host picam
 	
 	docker run --rm --name publisher --env ROS_MASTER_URI=http://10.0.1.27:11311 -e ROS_HOSTNAME=10.0.1.26  --tty=True --net=host publisher
 
