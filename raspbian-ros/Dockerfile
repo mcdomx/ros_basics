@@ -59,6 +59,8 @@ WORKDIR /catkin_ws
 RUN rosdep install -y --from-paths src --ignore-src --rosdistro $ROS_VERSION -r --os=debian:$DEBIAN_VERSION
 
 # build catkin workspace
+RUN pip install terminal_color
+
 RUN ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/$ROS_VERSION
 
 ### END OF WEB PAGE INSTRUCTIONS
