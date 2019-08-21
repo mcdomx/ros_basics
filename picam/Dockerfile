@@ -21,12 +21,12 @@ RUN apt-get install -y python-picamera python3-picamera
 
 # Install OpenCV
 # https://www.pyimagesearch.com/2017/09/04/raspbian-stretch-install-opencv-3-python-on-your-raspberry-pi/
-RUN apt-get install libjpeg-dev libtiff5-dev libjasper-dev libpng12-dev
-RUN apt-get install libavcodec-dev libavformat-dev libswscale-dev libv4l-dev
-RUN apt-get install libxvidcore-dev libx264-dev
-RUN apt-get install libgtk2.0-dev libgtk-3-dev
-RUN apt-get install libatlas-base-dev gfortran
-RUN apt-get install python2.7-dev python3-dev
+RUN apt-get install -y libjpeg-dev libtiff5-dev libjasper-dev libpng12-dev
+RUN apt-get install -y libavcodec-dev libavformat-dev libswscale-dev libv4l-dev
+RUN apt-get install -y libxvidcore-dev libx264-dev
+RUN apt-get install -y libgtk2.0-dev libgtk-3-dev
+RUN apt-get install -y libatlas-base-dev gfortran
+RUN apt-get install -y python2.7-dev python3-dev
 
 
 RUN mkdir /opencv
