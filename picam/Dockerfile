@@ -16,7 +16,7 @@ RUN mkdir /picam_data && chown pi /picam_data
 RUN apt-get update
 RUN apt-get install -y python3 python3-pip
 RUN apt-get install -y python-opencv
-RUN apt-get install python-picamera python3-picamera
+RUN apt-get install -y python-picamera python3-picamera
 RUN mkdir /requirements
 WORKDIR /requirements
 COPY requirements.txt requirements.txt
