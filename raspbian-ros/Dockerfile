@@ -61,6 +61,8 @@ RUN rosdep install -y --from-paths src --ignore-src --rosdistro $ROS_VERSION -r 
 # build catkin workspace
 RUN apt-get install -y python-pip
 
+RUN pip install terminal_color
+
 RUN ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/$ROS_VERSION
 
 ### END OF WEB PAGE INSTRUCTIONS
