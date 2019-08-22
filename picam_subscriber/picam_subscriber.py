@@ -10,6 +10,7 @@ import numpy as np
 
 from std_msgs.msg import UInt8MultiArray
 
+from rospy.numpy_msg import numpy_msg
 
 # called when published
 def callback_receive_data(msg, args):
@@ -19,10 +20,7 @@ def callback_receive_data(msg, args):
     # data_received = msg.deserialize_numpy(msg.data, np)
     # rospy.loginfo("Done converting.")
     # rospy.loginfo(data_received)
-    length =
-    # packed with '<I%ss' %len.layout.dim
-
-
+    rospy.loginfo(type(msg.data))
     rospy.loginfo(msg.data)
 
     # save data somewhere so that the webserver can access it
@@ -36,7 +34,8 @@ if __name__ == '__main__':
     rospy.loginfo("Picam Subscriber has been started")
 
     # Create a subscriber
-    subsciber_pidev1 = rospy.Subscriber("/pidev2_images", UInt8MultiArray, callback=callback_receive_data, callback_args=("pidev1", "other_arg"))
+    # subsciber_pidev1 = rospy.Subscriber("/pidev2_images", UInt8MultiArray, callback=callback_receive_data, callback_args=("pidev1", "other_arg"))
+    subsciber_pidev1 = rospy.Subscriber("/pidev2_images", numpy_msg(int), callback=callback_receive_data, callback_args=("pidev1", "other_arg"))
 
     # stops and waits here without advancing
     try:
