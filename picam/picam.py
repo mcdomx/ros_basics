@@ -43,7 +43,7 @@ if __name__ == '__main__':
     camera = picamera.PiCamera()
     output = picamera.array.PiRGBArray(camera)
     camera.resolution = resolution
-    camera.framerate = framrate
+    # camera.framerate = framerate
 
     # Create a publisher topic
     topicname = "/" + nodename + "_images"
