@@ -11,14 +11,17 @@ FROM raspbian-ros
 RUN apt-get update
 RUN apt-get install -y python3 python3-pip
 
+# needed for the deserialization of published arrays
+RUN apt-get install -y libatlas-base-dev
+
 # Import Python Dependencies and Requirements
 RUN mkdir /requirements
 WORKDIR /requirements
 COPY requirements.txt requirements.txt
 RUN pip3 install --no-cache -r requirements.txt
 
-# needed for the deserialization of published arrays
-RUN apt-get install -y libatlas-base-dev
+
+
 
 COPY picam_subscriber.py /catkin_ws/src/master_pkg/src/picam_subscriber.py
 
