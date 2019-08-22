@@ -18,7 +18,7 @@ COPY requirements.txt requirements.txt
 RUN pip3 install --no-cache -r requirements.txt
 
 # needed for the deserialization of published arrays
-RUN apt-get install libatlas-base-dev
+RUN apt-get install -y libatlas-base-dev
 
 COPY picam_subscriber.py /catkin_ws/src/master_pkg/src/picam_subscriber.py
 
