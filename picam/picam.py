@@ -50,11 +50,11 @@ if __name__ == '__main__':
     # set rate in milliseconds)
     rate = rospy.Rate(publish_rate_Hz)
 
-    camera.resolution = resolution
-    camera.framerate = framrate
-
     camera = picamera.PiCamera()
     output = picamera.array.PiRGBArray(camera)
+
+    camera.resolution = resolution
+    camera.framerate = framrate
 
     i = 1
     while not rospy.is_shutdown():
