@@ -20,6 +20,7 @@ import picamera
 import picamera.array
 import rospy
 import numpy as np
+from array import array
 
 from std_msgs.msg import UInt8MultiArray
 from std_msgs.msg import MultiArrayLayout
