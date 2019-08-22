@@ -11,8 +11,10 @@ from std_msgs.msg import UInt8MultiArray
 
 # called when published
 def callback_receive_data(msg, host):
-    rospy.loginfo("Message received")
-    rospy.loginfo(msg)
+    rospy.loginfo("Message received from: ", host)
+    rospy.loginfo(msg.layout)
+    rospy.loginfo(msg.data)
+
     # save data somewhere so that the webserver can access it
     # overwrite anything that was already there.
 
