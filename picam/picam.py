@@ -75,10 +75,11 @@ if __name__ == '__main__':
     i = 1
     while not rospy.is_shutdown():
         img_array = np.empty((320, 240, 3), dtype=np.uint8)
+
         try:
             camera.capture(img_array, 'rgb')
 
-            pub.publish(UInt8MultiArray(layout=layout, data=list(img_array)))
+            pub.publish(UInt8MultiArray(layout=layout, data=array('I', img_array.flatten())))
             print('%d - Published %dx%dx%d image' % (
                     i, img_array.shape[0], img_array.shape[1], img_array.shape[2]))
             # Here, we want to publish the array value
