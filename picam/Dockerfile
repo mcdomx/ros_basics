@@ -19,6 +19,7 @@ RUN apt-get update
 RUN apt-get install -y python3 python3-pip
 RUN apt-get install -y python-picamera python3-picamera
 
+# Import Python Dependencies and Requirements
 RUN mkdir /requirements
 WORKDIR /requirements
 COPY requirements.txt requirements.txt

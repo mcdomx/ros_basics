@@ -90,7 +90,7 @@ On pidev2
 
 On pidev1
 
-	docker run --rm --name subscriber --env ROS_MASTER_URI=http://10.0.1.27:11311 -e ROS_HOSTNAME=10.0.1.27  --tty=True --net=host subscriber
+	docker run --rm --name picam_subscriber --env ROS_MASTER_URI=http://10.0.1.4:11311 -e ROS_HOSTNAME=10.0.1.30  --tty=True --net=host picam_subscriber
 
 
 ### Run Service Server
