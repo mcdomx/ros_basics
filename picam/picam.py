@@ -22,6 +22,8 @@ import rospy
 import numpy as np
 
 from std_msgs.msg import UInt8MultiArray
+from std_msgs.msg import MultiArrayLayout
+from std_msgs.msg import MultiArrayDimension
 
 
 if __name__ == '__main__':
@@ -57,23 +59,20 @@ if __name__ == '__main__':
     # where each element in a dictionay consisting of 'label', 'size' and 'stride'
     # 'data' is the array in the layout dimensions
 
-    from types import SimpleNamespace
-    dim = {}
-    width_layout   = { 'label':'width', 'size': resolution[0], 'stride': resolution[0]*resolution[1]*channels }
-    dim[0]   = SimpleNamespace(**width_layout)
-    height_layout  = { 'label':'height', 'size': resolution[1], 'stride': resolution[1]*channels }
-    dim[1]   = SimpleNamespace(**height_layout)
-    channel_layout = { 'label':'channel', 'size': channels, 'stride': channels }
-    dim[2]   = SimpleNamespace(**channel_layout)
+    height_dim = MultiArrayDimension('height',  resolution[1], resolution[1]*resolution[0]*channels)
+    width_dim = MultiArrayDimension('width',  resolution[0], resolution[0]*channels)
+    channel_dim = MultiArrayDimension('channel',  channels, channels)
 
-    # layout = (width_layout, height_layout, channel_layout)
+    dim = (height_dim, width_dim, channel_dim)
+    data_offset = 0
+    layout = (dim, data_offset)
 
     i = 1
     while not rospy.is_shutdown():
         img_array = np.empty((480, 640, 3), dtype=np.uint8)
         try:
             camera.capture(img_array, 'rgb')
-            pub.publish(dim, img_array)
+            pub.publish(layout, img_array)
             print('%d - Published %dx%dx%d image' % (
                     i, img_array.shape[0], img_array.shape[1], img_array.shape[2]))
             # Here, we want to publish the array value
