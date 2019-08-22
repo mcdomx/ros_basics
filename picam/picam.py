@@ -19,12 +19,12 @@ if __name__ == '__main__':
 
     # set rate in milliseconds)
     rate=rospy.Rate(2000)
+    camera = picamera.PiCamera()
+    output = picamera.array.PiRGBArray(camera)
 
     i = 1
     while not rospy.is_shutdown():
         try:
-            camera = picamera.PiCamera()
-            output = picamera.array.PiRGBArray(camera)
             camera.capture(output, 'rgb')
             print('%d - Captured %dx%dx%d image' % (
                     i, output.array.shape[0], output.array.shape[1], output.array.shape[2]))
