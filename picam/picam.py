@@ -59,7 +59,7 @@ if __name__ == '__main__':
             pub.publish(output)
             print('%d - Published %dx%dx%d image' % (
                     i, output.shape[0], output.shape[1], output.shape[2]))
-            Here, we want to publish the array value
+            # Here, we want to publish the array value
             # with picamera.PiCamera() as camera:
             #     with picamera.array.PiRGBArray(camera) as output:
             #         camera.capture(output, 'rgb')
