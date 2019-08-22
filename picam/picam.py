@@ -18,7 +18,7 @@ if __name__ == '__main__':
     rospy.loginfo("PiCamera has been started")
 
     # set rate in milliseconds)
-    rate=rospy.Rate(200)
+    rate=rospy.Rate(2000)
 
     i = 1
     while not rospy.is_shutdown():
@@ -26,8 +26,8 @@ if __name__ == '__main__':
             camera = picamera.PiCamera()
             output = picamera.array.PiRGBArray(camera)
             camera.capture(output, 'rgb')
-            print('Captured %dx%dx%d image' % (
-                    output.array.shape[0], output.array.shape[1], output.array.shape[1]))
+            print('%d - Captured %dx%dx%d image' % (
+                    i, output.array.shape[0], output.array.shape[1], output.array.shape[2]))
             # Here, we want to publish the array value
             # with picamera.PiCamera() as camera:
             #     with picamera.array.PiRGBArray(camera) as output:
