@@ -25,7 +25,7 @@ from std_msgs.msg import UInt8MultiArray
 from std_msgs.msg import MultiArrayLayout
 from std_msgs.msg import MultiArrayDimension
 
-from types import SimpleNamespace
+# from types import SimpleNamespace
 
 
 if __name__ == '__main__':
@@ -68,11 +68,7 @@ if __name__ == '__main__':
     dim = (height_dim, width_dim, channel_dim)
     data_offset = 0
 
-    layout = {}
-    layout['dim'] = dim
-    layout['data_offset'] = data_offset
-
-    layout = SimpleNamespace(**layout)
+    layout = MultiArrayLayout(dim=dim, data_offset=data_offset)
 
     i = 1
     while not rospy.is_shutdown():
