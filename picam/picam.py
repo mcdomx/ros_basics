@@ -25,6 +25,7 @@ if __name__ == '__main__':
     i = 1
     while not rospy.is_shutdown():
         try:
+            output = np.empty((480, 640, 3), dtype=np.uint8)
             camera.capture(output, 'rgb')
             print('%d - Captured %dx%dx%d image' % (
                     i, output.array.shape[0], output.array.shape[1], output.array.shape[2]))
