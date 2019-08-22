@@ -5,7 +5,7 @@
 
 FROM rosbasic
 
-COPY subscriber.py /catkin_ws/src/master_pkg/src/picam_subscriber.py
+COPY picam_subscriber.py /catkin_ws/src/master_pkg/src/picam_subscriber.py
 
 ADD  run.sh run.sh
 CMD ./run.sh
