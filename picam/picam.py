@@ -71,11 +71,10 @@ if __name__ == '__main__':
 
     layout = MultiArrayLayout(dim=dim, data_offset=data_offset)
 
+    img_array = np.empty((320, 240, 3), dtype=np.uint8)
+    i = 0
 
-
-    i = 1
     while not rospy.is_shutdown():
-        img_array = np.empty((320, 240, 3), dtype=np.uint8)
 
         try:
             camera.capture(img_array, 'rgb')
