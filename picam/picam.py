@@ -80,7 +80,8 @@ if __name__ == '__main__':
         try:
             camera.capture(img_array, 'rgb')
 
-            pub.publish(UInt8MultiArray(layout=layout, data=array('I', img_array.flatten())))
+            # pub.publish(UInt8MultiArray(layout=layout, data=array('I', img_array.flatten())))
+            pub.publish(UInt8MultiArray(layout=layout, data=list(img_array.flatten())))
             print('%d - Published %dx%dx%d image' % (
                     i, img_array.shape[0], img_array.shape[1], img_array.shape[2]))
             # Here, we want to publish the array value
