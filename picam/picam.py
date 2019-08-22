@@ -74,7 +74,7 @@ if __name__ == '__main__':
             camera.capture(img_array, 'rgb')
             pub.publish(layout, channel_layout)
             print('%d - Published %dx%dx%d image' % (
-                    i, output.shape[0], output.shape[1], output.shape[2]))
+                    i, img_array.shape[0], img_array.shape[1], img_array.shape[2]))
             # Here, we want to publish the array value
             # with picamera.PiCamera() as camera:
             #     with picamera.array.PiRGBArray(camera) as output:
