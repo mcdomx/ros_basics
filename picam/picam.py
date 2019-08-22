@@ -29,7 +29,7 @@ if __name__ == '__main__':
             output = np.empty((480, 640, 3), dtype=np.uint8)
             camera.capture(output, 'rgb')
             print('%d - Captured %dx%dx%d image' % (
-                    i, output.array.shape[0], output.array.shape[1], output.array.shape[2]))
+                    i, output.shape[0], output.shape[1], output.shape[2]))
             # Here, we want to publish the array value
             # with picamera.PiCamera() as camera:
             #     with picamera.array.PiRGBArray(camera) as output:
