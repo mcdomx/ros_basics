@@ -5,13 +5,14 @@
 
 import rospy
 import sys
+import collections
 
 from std_msgs.msg import UInt8MultiArray
 
 
 # called when published
 def callback_receive_data(msg, args):
-    rospy.loginfo(args.host)
+    rospy.loginfo(args[0])
     rospy.loginfo(msg.layout)
     rospy.loginfo(int(msg.data))
 
@@ -26,7 +27,7 @@ if __name__ == '__main__':
     rospy.loginfo("Picam Subscriber has been started")
 
     # Create a subscriber
-    subsciber_pidev1 = rospy.Subscriber("/pidev2_images", UInt8MultiArray, callback=callback_receive_data, callback_args=(host="pidev1"))
+    subsciber_pidev1 = rospy.Subscriber("/pidev2_images", UInt8MultiArray, callback=callback_receive_data, callback_args=("pidev1", "other_arg"))
 
     # stops and waits here without advancing
     try:
