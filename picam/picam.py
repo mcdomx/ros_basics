@@ -39,9 +39,10 @@ if __name__ == '__main__':
     publish_rate_Hz = 1 # 1/Hz = seconds
     rate = rospy.Rate(publish_rate_Hz) # set rate in milliseconds)
     resolution = (320, 240)
+    channels = 3
 
     camera = picamera.PiCamera()
-    output = picamera.array.PiRGBArray(camera)
+    img_array = picamera.array.PiRGBArray(camera)
     camera.resolution = resolution
     # camera.framerate = framerate
 
@@ -51,12 +52,27 @@ if __name__ == '__main__':
 
     rospy.loginfo("PiCamera is publishing on {}".format(topicname))
 
+    # Published data is a dictionary with 'layout' and 'data' as elements
+    # 'layout' is an array of dimension properties (shape[0], shape[1], shape[2])
+    # where each element in a dictionay consisting of 'label', 'size' and 'stride'
+    # 'data' is the array in the layout dimensions
+
+    from types import SimpleNamespace
+    width_layout   = { 'label':'width', 'size': resolution[0], 'stride': resolution[0]*resolution[1]*channels }
+    width_layout   = SimpleNamespace(**width_layout)
+    height_layout  = { 'label':'height', 'size': resolution[1], 'stride': resolution[1]*channels }
+    height_layout   = SimpleNamespace(**height_layout)
+    channel_layout = { 'label':'channel', 'size': channels, 'stride': channels }
+    channel_layout   = SimpleNamespace(**channel_layout)
+
+    layout = (width_layout, height_layout, channel_layout)
+
     i = 1
     while not rospy.is_shutdown():
-        output = np.empty((480, 640, 3), dtype=np.uint8)
+        img_array = np.empty((480, 640, 3), dtype=np.uint8)
         try:
-            camera.capture(output, 'rgb')
-            pub.publish(output)
+            camera.capture(img_array, 'rgb')
+            pub.publish(layout, channel_layout)
             print('%d - Published %dx%dx%d image' % (
                     i, output.shape[0], output.shape[1], output.shape[2]))
             # Here, we want to publish the array value
