@@ -16,7 +16,7 @@ def callback_receive_data(msg, args):
     rospy.loginfo(str(args[0]))
     rospy.loginfo(msg.layout)
     rospy.loginfo("converting to int...")
-    data_received = msg.deserialize_numpy(msg.data, np)
+    data_received = msg.deserialize(msg.data)
     rospy.loginfo("Done converting.")
     rospy.loginfo(data_received)
 
