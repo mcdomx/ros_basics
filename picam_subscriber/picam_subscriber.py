@@ -19,6 +19,10 @@ def callback_receive_data(msg, args):
     # data_received = msg.deserialize_numpy(msg.data, np)
     # rospy.loginfo("Done converting.")
     # rospy.loginfo(data_received)
+    length =
+    # packed with '<I%ss' %len.layout.dim
+
+
     rospy.loginfo(msg.data)
 
     # save data somewhere so that the webserver can access it

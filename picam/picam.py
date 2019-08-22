@@ -26,8 +26,7 @@ from std_msgs.msg import UInt8MultiArray
 from std_msgs.msg import MultiArrayLayout
 from std_msgs.msg import MultiArrayDimension
 
-# from types import SimpleNamespace
-
+from rospy.numpy_msg import numpy_msg
 
 if __name__ == '__main__':
 
