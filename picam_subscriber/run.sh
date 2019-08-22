@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 echo "********************************************************"
 echo "SUBSCRIBER NODE"
@@ -7,12 +7,13 @@ echo "ROS_HOSTNAME: $ROS_HOSTNAME"
 echo "ROS_IP: $ROS_IP"
 echo "********************************************************"
 
-# Give time to startup
-sleep 2
+# Set environment to execute ROS commands
+source /catkin_ws/devel/setup.bash
 
 while ! (rosnode list | grep rosout); do echo "waiting..."; sleep 5 ; done
 
-python /catkin_ws/src/master_pkg/src/subscriber.py
-# rosrun master_pkg subscriber.py
+# Start picam_subscriber.py
+# python /catkin_ws/src/master_pkg/src/subscriber.py
+rosrun master_pkg picam_subscriber.py
 
-echo ">>>>>>>>>>>> subscriber is running on master: $ROS_MASTER_URI"
+echo ">>>>>>>>>>>> picam_subscriber is running on master: $ROS_MASTER_URI"
