@@ -38,8 +38,8 @@ if __name__ == '__main__':
             # publish cur_frame
 
             # If q is pressed
-            if cv2.waitKey(1) & 0xFF == ord('q'):
-                break
+            # if cv2.waitKey(1) & 0xFF == ord('q'):
+            #     break
 
             rate.sleep() # this will 'pulse' the loop at the rate
 
