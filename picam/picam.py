@@ -26,9 +26,6 @@ from std_msgs.msg import UInt8MultiArray
 
 if __name__ == '__main__':
 
-    publish_rate_Hz = 1 # 1/Hz = seconds
-    resolution = (320, 240)
-
     # Assign nodename - if not set, exit
     try:
         nodename = os.getenv('NODENAME')
@@ -39,6 +36,15 @@ if __name__ == '__main__':
         rospy.loginfo("      -e NODENAME=$(hostname)")
         exit(1)
 
+    publish_rate_Hz = 1 # 1/Hz = seconds
+    rate = rospy.Rate(publish_rate_Hz) # set rate in milliseconds)
+    resolution = (320, 240)
+
+    camera = picamera.PiCamera()
+    output = picamera.array.PiRGBArray(camera)
+    camera.resolution = resolution
+    camera.framerate = framrate
+
     # Create a publisher topic
     topicname = "/" + nodename + "_images"
     pub = rospy.Publisher(topicname, UInt8MultiArray, queue_size=10)
@@ -47,14 +53,7 @@ if __name__ == '__main__':
     rospy.loginfo("PiCamera is publishing on {}".format(topicname))
 
 
-    # set rate in milliseconds)
-    rate = rospy.Rate(publish_rate_Hz)
 
-    camera = picamera.PiCamera()
-    output = picamera.array.PiRGBArray(camera)
-
-    camera.resolution = resolution
-    camera.framerate = framrate
 
     i = 1
     while not rospy.is_shutdown():
