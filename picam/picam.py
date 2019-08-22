@@ -7,6 +7,7 @@ import os
 import picamera
 import picamera.array
 import rospy
+import numpy as np
 
 # cam = "http://pidev1.local:8080/?action=stream"
 # cap = cv2.VideoCapture(cam)
