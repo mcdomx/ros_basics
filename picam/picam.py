@@ -49,26 +49,23 @@ if __name__ == '__main__':
     topicname = "/" + nodename + "_images"
     pub = rospy.Publisher(topicname, UInt8MultiArray, queue_size=10)
 
-
     rospy.loginfo("PiCamera is publishing on {}".format(topicname))
-
-
-
 
     i = 1
     while not rospy.is_shutdown():
+        output = np.empty((480, 640, 3), dtype=np.uint8)
         try:
-            # output = np.empty((480, 640, 3), dtype=np.uint8)
-            # camera.capture(output, 'rgb')
-            # print('%d - Captured %dx%dx%d image' % (
-            #         i, output.shape[0], output.shape[1], output.shape[2]))
-            # Here, we want to publish the array value
-            with picamera.PiCamera() as camera:
-                with picamera.array.PiRGBArray(camera) as output:
-                    camera.capture(output, 'rgb')
-                    pub.publish(output)
-                    print('%d - Published %dx%dx%d image' % (
-                            i, output.shape[0], output.shape[1], output.shape[2]))
+            camera.capture(output, 'rgb')
+            pub.publish(output)
+            print('%d - Published %dx%dx%d image' % (
+                    i, output.shape[0], output.shape[1], output.shape[2]))
+            Here, we want to publish the array value
+            # with picamera.PiCamera() as camera:
+            #     with picamera.array.PiRGBArray(camera) as output:
+            #         camera.capture(output, 'rgb')
+            #         pub.publish(output)
+            #         print('%d - Published %dx%dx%d image' % (
+            #                 i, output.shape[0], output.shape[1], output.shape[2]))
             i += 1
 
             rate.sleep() # this will 'pulse' the loop at the rate
