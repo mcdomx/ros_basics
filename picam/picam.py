@@ -58,21 +58,22 @@ if __name__ == '__main__':
     # 'data' is the array in the layout dimensions
 
     from types import SimpleNamespace
+    dim = {}
     width_layout   = { 'label':'width', 'size': resolution[0], 'stride': resolution[0]*resolution[1]*channels }
-    width_layout   = SimpleNamespace(**width_layout)
+    dim[0]   = SimpleNamespace(**width_layout)
     height_layout  = { 'label':'height', 'size': resolution[1], 'stride': resolution[1]*channels }
-    height_layout   = SimpleNamespace(**height_layout)
+    dim[1]   = SimpleNamespace(**height_layout)
     channel_layout = { 'label':'channel', 'size': channels, 'stride': channels }
-    channel_layout   = SimpleNamespace(**channel_layout)
+    dim[2]   = SimpleNamespace(**channel_layout)
 
-    layout = (width_layout, height_layout, channel_layout)
+    # layout = (width_layout, height_layout, channel_layout)
 
     i = 1
     while not rospy.is_shutdown():
         img_array = np.empty((480, 640, 3), dtype=np.uint8)
         try:
             camera.capture(img_array, 'rgb')
-            pub.publish(layout, channel_layout)
+            pub.publish(dim, img_array)
             print('%d - Published %dx%dx%d image' % (
                     i, img_array.shape[0], img_array.shape[1], img_array.shape[2]))
             # Here, we want to publish the array value
