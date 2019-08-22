@@ -26,7 +26,7 @@ if __name__ == '__main__':
     rospy.loginfo("Picam Subscriber has been started")
 
     # Create a subscriber
-    subsciber_pidev1 = rospy.Subscriber("/pidev2_images", UInt8MultiArray, callback=callback_receive_data, ("pidev1"))
+    subsciber_pidev1 = rospy.Subscriber("/pidev2_images", UInt8MultiArray, callback_receive_data, ("pidev1"))
 
     # stops and waits here without advancing
     try:
