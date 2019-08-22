@@ -16,7 +16,7 @@ def callback_receive_data(msg, args):
     rospy.loginfo(msg.layout)
     rospy.loginfo("converting to int...")
 
-    data_received = ()
+    data_received = []
     for byte in msg.data:
         data_received.append(int.from_bytes(byte, byteorder='big', signed=False))
     # data_received = int.from_bytes(msg.data, byteorder='big', signed=False)
