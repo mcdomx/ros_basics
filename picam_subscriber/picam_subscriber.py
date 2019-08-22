@@ -14,7 +14,10 @@ from std_msgs.msg import UInt8MultiArray
 def callback_receive_data(msg, args):
     rospy.loginfo(str(args[0]))
     rospy.loginfo(msg.layout)
-    rospy.loginfo(int.from_bytes(msg.data, byteorder='big', signed=False))
+    rospy.loginfo("converting to int...")
+    data_received = int.from_bytes(msg.data, byteorder='big', signed=False)
+    rospy.loginfo("Done converting.")
+    rospy.loginfo(data_received)
 
     # save data somewhere so that the webserver can access it
     # overwrite anything that was already there.
