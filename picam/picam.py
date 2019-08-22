@@ -44,7 +44,7 @@ if __name__ == '__main__':
     pub = rospy.Publisher(topicname, UInt8MultiArray, queue_size=10)
 
 
-    rospy.loginfo("PiCamera is publishing on ", topicname)
+    rospy.loginfo("PiCamera is publishing on {}".format(topicname))
 
 
     # set rate in milliseconds)
