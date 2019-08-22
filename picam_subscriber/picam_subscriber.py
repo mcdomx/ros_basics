@@ -12,7 +12,7 @@ from std_msgs.msg import UInt8MultiArray
 
 # called when published
 def callback_receive_data(msg, args):
-    rospy.loginfo("Host: ", args[0])
+    rospy.loginfo(str(args[0]))
     rospy.loginfo(msg.layout)
     rospy.loginfo(int.from_bytes(msg.data, byteorder='big', signed=False))
 
