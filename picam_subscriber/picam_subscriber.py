@@ -15,13 +15,12 @@ from rospy.numpy_msg import numpy_msg
 # called when published
 def callback_receive_data(msg, args):
     rospy.loginfo(str(args[0]))
-    rospy.loginfo(msg.layout)
-    rospy.loginfo("converting to int...")
-    # data_received = msg.deserialize_numpy(msg.data, np)
+    # rospy.loginfo(msg.layout)
+    # rospy.loginfo("converting to int...")
     # rospy.loginfo("Done converting.")
     # rospy.loginfo(data_received)
-    rospy.loginfo(type(msg.data))
-    rospy.loginfo(msg.data)
+    rospy.loginfo(type(msg))
+    rospy.loginfo(msg)
 
     # save data somewhere so that the webserver can access it
     # overwrite anything that was already there.
