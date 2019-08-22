@@ -74,12 +74,13 @@ if __name__ == '__main__':
 
     i = 1
     while not rospy.is_shutdown():
-        data = np.empty((320, 240, 3), dtype=np.uint8)
+        img_array = np.empty((320, 240, 3), dtype=np.uint8)
         try:
-            camera.capture(data, 'rgb')
-            pub.publish(UInt8MultiArray(layout=layout, data=data))
+            camera.capture(img_array, 'rgb')
+
+            pub.publish(UInt8MultiArray(layout=layout, data=img_array.tolist()))
             print('%d - Published %dx%dx%d image' % (
-                    i, data.shape[0], data.shape[1], data.shape[2]))
+                    i, img_array.shape[0], img_array.shape[1], img_array.shape[2]))
             # Here, we want to publish the array value
             # with picamera.PiCamera() as camera:
             #     with picamera.array.PiRGBArray(camera) as output:
