@@ -65,7 +65,10 @@ if __name__ == '__main__':
 
     dim = (height_dim, width_dim, channel_dim)
     data_offset = 0
-    layout = (dim, data_offset)
+
+    layout = {}
+    layout['dim'] = dim
+    layout['data_offset'] = data_offset
 
     i = 1
     while not rospy.is_shutdown():
