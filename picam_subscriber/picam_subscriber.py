@@ -109,7 +109,7 @@ if __name__ == '__main__':
 
         # look for new topics and register new ones
         for topic in cur_topics:
-            rospy.loginfo("checking: ", str(topic), str(topic[0]), str(topic[1]))
+            rospy.loginfo("checking: {%s} {%s} {%s} ".format(str(topic), str(topic[0]), str(topic[1])))
             if topic[1] == 'std_msgs/Int16MultiArray':
                 rospy.loginfo("found valid topic to subscribe to")
                 if topic[0] not in activeSubscriptions:
