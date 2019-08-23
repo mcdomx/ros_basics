@@ -23,7 +23,7 @@ class Registration:
             # rospy.loginfo(type(msg.data))
             img_array = np.resize(msg.data, (msg.layout.dim[1].size, msg.layout.dim[0].size, msg.layout.dim[2].size))
             rospy.loginfo("Received message with shape: {}".format(img_array.shape))
-            objectCounter.count(img_array)
+            # sobjectCounter.count(img_array)
         except:
             # Failed call - deregister subscriber
             Registration.unRegisterCamera(args[0])
