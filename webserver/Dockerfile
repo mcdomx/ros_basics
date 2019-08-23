@@ -66,14 +66,17 @@ ARG OPENCV_VERSION=4.0.0
 ENV OPENCV_VERSION $OPENCV_VERSION
 
 	# download latest source & contrib
-RUN	cd /tmp \
-	&& wget -c -N -nv -O opencv.zip https://github.com/opencv/opencv/archive/$OPENCV_VERSION.zip \
+WORKDIR	/tmp
+RUN	wget -c -N -nv -O opencv.zip https://github.com/opencv/opencv/archive/$OPENCV_VERSION.zip \
 	&& unzip opencv.zip \
 	&& wget -c -N -nv -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/$OPENCV_VERSION.zip \
 	&& unzip opencv_contrib.zip \
+	&& rm -r opencv.zip \
+	&& rm -r opencv_contrib.zip
+	
 	# build opencv \
-	&& cd /tmp/opencv-$OPENCV_VERSION \
-	&& mkdir build \
+WORKDIR	/tmp/opencv-$OPENCV_VERSION
+RUN	mkdir build \
 	&& cd build \
 	&& cmake -D CMAKE_BUILD_TYPE=RELEASE \
 		-D CMAKE_INSTALL_PREFIX=/usr/local \
@@ -86,7 +89,7 @@ RUN	cd /tmp \
 
 RUN	make -j2  \
 	&& make install\
-	ldconfig && \
+	# ldconfig && \
 	&& make clean \
 	# cleanup source \
 	&& cd / \
