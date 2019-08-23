@@ -28,7 +28,7 @@ RUN make && make install && chmod +x docker-start.sh
 RUN apt-get install -y libjpeg-dev libtiff5-dev libjasper-dev libpng12-dev
 RUN apt-get install -y libavcodec-dev libavformat-dev libswscale-dev libv4l-dev
 RUN apt-get install -y libxvidcore-dev libx264-dev
-RUN apt-get install -y libgtk2.0-dev libpaper1- bsdmainutils-
+RUN apt-get install -y libgtk2.0-dev libpaper1- bsdmainutils- libpam-systemd-
 RUN apt-get install -y libgtk-3-dev libpaper1-
 RUN apt-get install -y libatlas-base-dev gfortran
 RUN apt-get install -y python2.7-dev python3-dev
