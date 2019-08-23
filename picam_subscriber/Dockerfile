@@ -9,12 +9,13 @@ FROM raspbian-ros
 # Install Necessary Components and Utilities
 RUN apt-get update
 RUN apt-get install -y python3 python3-pip
+RUN apt-get install -y python python-pip
 
 # needed for the deserialization of published arrays
 RUN apt-get install -y libatlas-base-dev
 
 # Import Python Dependencies and Requirements
-RUN pip3 install -U tensorflow keras opencv-python
+RUN pip install -U tensorflow keras opencv-python
 RUN pip3 install imageai --upgrade
 RUN mkdir /requirements
 WORKDIR /requirements
