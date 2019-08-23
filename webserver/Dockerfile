@@ -82,7 +82,7 @@ RUN	cd /tmp \
 		-D BUILD_NEW_PYTHON_SUPPORT=ON \
 		-D INSTALL_PYTHON_EXAMPLES=ON \
 		-D OPENCV_EXTRA_MODULES_PATH=/tmp/opencv_contrib-$OPENCV_VERSION/modules \
-		-D BUILD_EXAMPLES=ON .. \
+		-D BUILD_EXAMPLES=ON .. 
 
 RUN	make -j2  \
 	&& make install\
