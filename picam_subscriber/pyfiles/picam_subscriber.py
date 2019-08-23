@@ -8,7 +8,7 @@ import sys
 # import collections
 import numpy as np
 import time
-import Registration
+import Registration as reg
 
 # from std_msgs.msg import UInt8MultiArray
 # from std_msgs.msg import Int16MultiArray
@@ -101,7 +101,7 @@ if __name__ == '__main__':
         cur_topics = rospy.get_published_topics()
         rospy.loginfo("cur_topics:")
         rospy.loginfo(cur_topics)
-        activeSubscriptions = Registration.get_active_subscriptions()
+        activeSubscriptions = reg.Registration.get_active_subscriptions()
         rospy.loginfo("activeSubscriptions:")
         rospy.loginfo(activeSubscriptions)
 
@@ -112,12 +112,12 @@ if __name__ == '__main__':
                 rospy.loginfo("found valid topic to subscribe to")
                 if topic[0] not in activeSubscriptions:
                     rospy.loginfo("{} is not active".format(topic[0]))
-                    Registration(topic[0])
+                    reg.Registration(topic[0])
 
         # look for topics that are no longer being published
         for activeTopic in activeSubscriptions:
             if activeTopic not in cur_topics:
-                Registration.unRegisterCamera(activeTopic)
+                reg.Registration.unRegisterCamera(activeTopic)
 
         rate.sleep() # this will 'pulse' the loop at the rate
 
