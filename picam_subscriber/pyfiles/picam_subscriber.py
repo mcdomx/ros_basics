@@ -121,7 +121,8 @@ if __name__ == '__main__':
         rospy.loginfo(cur_topics)
         rospy.loginfo("activeSubscriptions:")
         rospy.loginfo(activeSubscriptions)
-        for activeTopic in activeSubscriptions:
+        for activeTopic in activeSubscriptions[0:1]:
+            rospy.loginfo("Checking: {}".format(activeTopic))
             if activeTopic not in cur_topics:
                 reg.Registration.unRegisterCamera(activeTopic)
 
