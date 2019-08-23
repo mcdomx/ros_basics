@@ -117,13 +117,13 @@ if __name__ == '__main__':
         # look for topics that are no longer being published
         activeSubscriptions = reg.Registration.get_active_subscriptions()
         cur_topics = rospy.get_published_topics()
-        rospy.loginfo("cur_topics:")
-        rospy.loginfo(cur_topics)
+        rospy.loginfo("cur_topics[0:1]:")
+        rospy.loginfo(cur_topics[0:1])
         rospy.loginfo("activeSubscriptions:")
         rospy.loginfo(activeSubscriptions)
-        for activeTopic in activeSubscriptions[0:1]:
+        for activeTopic in activeSubscriptions:
             rospy.loginfo("Checking: {}".format(activeTopic))
-            if activeTopic not in cur_topics:
+            if activeTopic not in cur_topics[0:1]:
                 reg.Registration.unRegisterCamera(activeTopic)
 
         rate.sleep() # this will 'pulse' the loop at the rate
