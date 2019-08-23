@@ -19,13 +19,6 @@ WORKDIR /requirements
 COPY requirements.txt requirements.txt
 RUN pip3 install --no-cache -r requirements.txt
 
-RUN wget https://storage.googleapis.com/tensorflow-nightly/tensorflow-1.10.0-cp34-none-linux_armv7l.whl
-RUN pip3 install tensorflow-1.10.0-cp34-none-linux_armv7l.whl
-
-# Download YOYLv3 object detection database
-# WORKDIR /catkin_ws/src/master_pkg/src/
-# RUN wget -q https://github.com/OlafenwaMoses/ImageAI/releases/download/1.0/yolo.h5
-
 COPY pyfiles/ /catkin_ws/src/master_pkg/src/
 
 WORKDIR /
