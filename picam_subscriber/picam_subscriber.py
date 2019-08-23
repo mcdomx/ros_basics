@@ -18,8 +18,8 @@ from std_msgs.msg import Int8
 # This class will instantiate a new Subscriber instance
 # when a new topic is recognized in the network.
 class Registration:
-    activeSubscriptions {}
-    deactivatedTopics []
+    activeSubscriptions = {}
+    deactivatedTopics = []
 
     # called when published
     def callback_receive_data(msg, args):
