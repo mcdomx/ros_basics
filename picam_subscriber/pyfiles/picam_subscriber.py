@@ -116,6 +116,8 @@ if __name__ == '__main__':
 
         # look for topics that are no longer being published
         activeSubscriptions = reg.Registration.get_active_subscriptions()
+        rospy.loginfo("activeSubscriptions:")
+        rospy.loginfo(activeSubscriptions)
         for activeTopic in activeSubscriptions:
             if activeTopic not in cur_topics:
                 reg.Registration.unRegisterCamera(activeTopic)
