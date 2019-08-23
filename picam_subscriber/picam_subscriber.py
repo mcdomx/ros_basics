@@ -37,30 +37,30 @@ class Registration:
 
     def __init__(self, new_topic):
 
-        if new_topic in deactivatedTopics:
+        if new_topic in Registration.deactivatedTopics:
             rospy.loginfo("{} has already once been deactivated because it was not a camera.  Not registering".format(new_topic))
             return None
 
-        if new_topic in activeSubscriptions.keys():
+        if new_topic in Registration.activeSubscriptions.keys():
             rospy.loginfo("{} is already active.  No action taken.".format(new_topic))
             return None
 
         # Create a subscriber
         new_subscription = rospy.Subscriber(new_topic, Int16MultiArray, callback=callback_receive_data, callback_args=(new_topic, "other_arg"))
 
-        activeSubscriptions[new_topic] = new_subscription
+        Registration.activeSubscriptions[new_topic] = new_subscription
         return new_subscription
 
 
 
     @staticmethod
     def unRegisterCamera(topic_name):
-        if topic_name not in activeSubscriptions:
+        if topic_name not in Registration.activeSubscriptions:
             rospy.loginfo("{} not an active registration.  No action taken.".format(topic_name))
             return None
 
-        subscription = activeSubscriptions[topic_name]
-        deactivatedTopics.append(topic_name)
+        subscription = Registration.activeSubscriptions[topic_name]
+        Registration.deactivatedTopics.append(topic_name)
         subscription.unregister()
         return topic_name
 
