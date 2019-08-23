@@ -14,16 +14,27 @@ from std_msgs.msg import Int16MultiArray
 from rospy.numpy_msg import numpy_msg
 from std_msgs.msg import Int8
 
+# This class will instantiate a new Subscriber instance
+# when a new topic is recognized in the network.
+class RegisterCamera:
+    def __init__(new_topic):
+        # Create a subscriber
+        new_subscription = rospy.Subscriber(new_topic, Int16MultiArray, callback=callback_receive_data, callback_args=(new_topic, "other_arg"))
+
+
+
+
+
 # called when published
 def callback_receive_data(msg, args):
     rospy.loginfo(str(args[0]))
-    rospy.loginfo(msg.layout)
-    # rospy.loginfo("converting to int...")
-    # rospy.loginfo("Done converting.")
-    # rospy.loginfo(data_received)
-    rospy.loginfo(type(msg.data))
-    resized_data = np.resize(msg.data, (msg.layout.dim[1].size, msg.layout.dim[0].size, msg.layout.dim[2].size))
-    rospy.loginfo(resized_data.shape)
+    try:
+        rospy.loginfo(msg.layout)
+        rospy.loginfo(type(msg.data))
+        resized_data = np.resize(msg.data, (msg.layout.dim[1].size, msg.layout.dim[0].size, msg.layout.dim[2].size))
+        rospy.loginfo(resized_data.shape)
+    except:
+        
 
     # save data somewhere so that the webserver can access it
     # overwrite anything that was already there.

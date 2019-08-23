@@ -40,6 +40,7 @@ RUN unzip opencv.zip
 RUN rm -r opencv.zip
 
 RUN wget -O opencv_contrib.zip https://github.com/Itseez/opencv_contrib/archive/3.3.0.zip
+RUN apt-get install -y unzip
 RUN unzip opencv_contrib.zip
 RUN rm -r opencv_contrib.zip
 
