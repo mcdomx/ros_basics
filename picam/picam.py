@@ -43,7 +43,7 @@ if __name__ == '__main__':
         exit(1)
 
     publish_rate_Hz = 1 # 1/Hz = seconds
-    rate = rospy.Rate(publish_rate_Hz) # set rate 
+    rate = rospy.Rate(publish_rate_Hz) # set rate
     resolution = (320, 240)
     channels = 3
 
@@ -101,4 +101,9 @@ if __name__ == '__main__':
         # If SIGINT is received
         except KeyboardInterrupt:
             rospy.loginfo("Stopped publishing: ", nodename, topicname)
+            pub.unregister()
             exit(2)
+
+    rospy.loginfo("Stopped publishing: ", nodename, topicname)
+    pub.unregister()
+    exit(2)

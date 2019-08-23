@@ -83,10 +83,10 @@ RUN	cd /tmp \
 		-D INSTALL_PYTHON_EXAMPLES=ON \
 		-D OPENCV_EXTRA_MODULES_PATH=/tmp/opencv_contrib-$OPENCV_VERSION/modules \
 		-D BUILD_EXAMPLES=ON .. \
-	&& make -j4  \
-	&& make \
+
+RUN	make -j2  \
 	&& make install\
-	# ldconfig && \
+	ldconfig && \
 	&& make clean \
 	# cleanup source \
 	&& cd / \
