@@ -35,7 +35,7 @@ class Registration:
             Registration.unRegisterCamera(args[0])
 
 
-    def __init__(new_topic):
+    def __init__(self, new_topic):
 
         if new_topic in deactivatedTopics:
             rospy.loginfo("{} has already once been deactivated because it was not a camera.  Not registering".format(new_topic))
