@@ -1,6 +1,10 @@
 # THIS SHOULD BE INSERTED IN ANOTHER DOCKERFILE
 # THIS IS NOT INTENDED TO BE BUILDABLE
 
+##########
+# OPENCV
+##########
+
 # Install OpenCV
 # https://www.pyimagesearch.com/2017/09/04/raspbian-stretch-install-opencv-3-python-on-your-raspberry-pi/
 RUN apt-get install -y libjpeg-dev libtiff5-dev libjasper-dev libpng12-dev
@@ -35,3 +39,7 @@ WORKDIR /usr/local/lib/python3.6/site-packages/
 RUN mv cv2.cpython-35m-arm-linux-gnueabihf.so cv2.so
 WORKDIR /usr/lib/python3.6/site-packages/
 RUN ln -s /usr/local/lib/python3.6/site-packages/cv2.so cv2.so
+
+##########
+# END OPENCV
+##########

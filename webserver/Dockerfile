@@ -20,7 +20,7 @@ RUN make && make install && chmod +x docker-start.sh
 
 
 ##########
-OPENCV
+# OPENCV
 ##########
 
 # Install OpenCV
@@ -60,7 +60,7 @@ RUN ln -s /usr/local/lib/python3.6/site-packages/cv2.so cv2.so
 
 
 ##########
-END OPENCV
+# END OPENCV
 ##########
 
 
