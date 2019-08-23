@@ -10,80 +10,6 @@ import numpy as np
 import time
 import Registration as reg
 
-# from std_msgs.msg import UInt8MultiArray
-# from std_msgs.msg import Int16MultiArray
-
-# from rospy.numpy_msg import numpy_msg
-# from std_msgs.msg import Int8
-
-# This class will instantiate a new Subscriber instance
-# when a new topic is recognized in the network.
-# class Registration:
-#     # todo make this local only
-#     activeSubscriptions = {}
-#
-#     # called when published
-#     def callback_receive_data(msg, args):
-#         rospy.loginfo(str(args[0]))
-#         try:
-#             # rospy.loginfo(msg.layout)
-#             # rospy.loginfo(type(msg.data))
-#             resized_data = np.resize(msg.data, (msg.layout.dim[1].size, msg.layout.dim[0].size, msg.layout.dim[2].size))
-#             rospy.loginfo("Received message with shape: {}".format(resized_data.shape))
-#         except:
-#             # Failed call - deregister subscriber
-#             Registration.unRegisterCamera(args[0])
-#
-#
-#     def __init__(self, new_topic):
-#
-#         if new_topic in Registration.activeSubscriptions.keys():
-#             rospy.loginfo("{} is already active.  No action taken.".format(new_topic))
-#             return None
-#
-#         # Create a subscriber
-#         new_subscription = rospy.Subscriber(new_topic, Int16MultiArray, callback=callback_receive_data, callback_args=(new_topic, "other_arg"))
-#
-#         Registration.activeSubscriptions[new_topic] = new_subscription
-#         rospy.loginfo("{} has been subscribed.".format(new_topic))
-#         return None
-#
-#
-#
-#     @staticmethod
-#     def unRegisterCamera(topic_name):
-#         if topic_name not in Registration.activeSubscriptions:
-#             rospy.loginfo("{} not an active registration.  No action taken.".format(topic_name))
-#             return None
-#
-#         subscription = Registration.activeSubscriptions[topic_name]
-#         subscription.unregister()
-#         del Registration.activeSubscriptions[topic_name]
-#         rospy.loginfo("Deregistered: {}".format(topic_name))
-#         return topic_name
-#
-#     @staticmethod
-#     def get_active_subscriptions():
-#         return Registration.activeSubscriptions.keys()
-#
-#
-#
-#
-# # called when published
-# def callback_receive_data(msg, args):
-#     rospy.loginfo(str(args[0]))
-#     try:
-#         rospy.loginfo(msg.layout)
-#         rospy.loginfo(type(msg.data))
-#         resized_data = np.resize(msg.data, (msg.layout.dim[1].size, msg.layout.dim[0].size, msg.layout.dim[2].size))
-#         rospy.loginfo(resized_data.shape)
-#     except:
-#         # Failed call - deregister subscriber
-#         Registration.unRegisterCamera(args[0])
-#
-#     # save data somewhere so that the webserver can access it
-#     # overwrite anything that was already there.
-
 # main will look for new topics and try to subscribe to them
 # if the topic is not a camera subscription, it will be deregistered
 if __name__ == '__main__':
@@ -127,24 +53,3 @@ if __name__ == '__main__':
                 reg.Registration.unRegisterCamera(activeTopic)
 
         rate.sleep() # this will 'pulse' the loop at the rate
-
-
-
-
-# Old main - subsequently made subscribing a class
-# if __name__ == '__main__':
-#
-#     rospy.init_node('picam_subscriber_node')
-#     rospy.loginfo("Picam Subscriber has been started")
-#
-#     # Create a subscriber
-#     subsciber_pidev1 = rospy.Subscriber("/pidev2_images", Int16MultiArray, callback=callback_receive_data, callback_args=("pidev1", "other_arg"))
-#
-#     # stops and waits here without advancing
-#     try:
-#         rospy.spin()
-#     except KeyboardInterrupt:
-#         print('Stopping Picam Subscriber.....')
-#         sys.exit(2)
-#
-#     sys.exit(0)
