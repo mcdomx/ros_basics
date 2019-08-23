@@ -7,7 +7,6 @@ import numpy as np
 import time
 
 from std_msgs.msg import Int16MultiArray
-import objectCounter
 
 # This class will instantiate a new Subscriber instance
 # when a new topic is recognized in the network.
@@ -20,10 +19,9 @@ class Registration:
         rospy.loginfo(str(args[0]))
         try:
             # rospy.loginfo(msg.layout)
-            # rospy.loginfo(type(msg.data))
             img_array = np.resize(msg.data, (msg.layout.dim[1].size, msg.layout.dim[0].size, msg.layout.dim[2].size))
             rospy.loginfo("Received message with shape: {}".format(img_array.shape))
-            # sobjectCounter.count(img_array)
+
         except:
             # Failed call - deregister subscriber
             Registration.unRegisterCamera(args[0])
