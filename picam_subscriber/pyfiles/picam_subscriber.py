@@ -117,8 +117,8 @@ if __name__ == '__main__':
         # look for topics that are no longer being published
         activeSubscriptions = reg.Registration.get_active_subscriptions()
         cur_topics = rospy.get_published_topics()
-        rospy.loginfo("cur_topics[:][0:1]:")
-        rospy.loginfo(cur_topics[:][0:1])
+        rospy.loginfo("cur_topics[][0:1]:")
+        rospy.loginfo(cur_topics[][0:1])
         rospy.loginfo("activeSubscriptions:")
         rospy.loginfo(activeSubscriptions)
         for activeTopic in activeSubscriptions:
