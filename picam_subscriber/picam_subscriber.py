@@ -114,7 +114,7 @@ if __name__ == '__main__':
                 if topic[0] not in activeSubscriptions:
                     rospy.loginfo("{} is not active".format(topic[0]))
                     rv = Registration(topic[0])
-                        rospy.loginfo("Registrtion result: ", rv)
+                    rospy.loginfo("Registrtion result: ", rv)
                         if rv is not None:
                             rospy.loginfo("{} has been subscribed.".format(topic[0]))
 
