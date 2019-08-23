@@ -11,6 +11,7 @@ import numpy as np
 from std_msgs.msg import UInt8MultiArray
 
 from rospy.numpy_msg import numpy_msg
+from std_msgs.msg import Int8
 
 # called when published
 def callback_receive_data(msg, args):
@@ -34,7 +35,7 @@ if __name__ == '__main__':
 
     # Create a subscriber
     # subsciber_pidev1 = rospy.Subscriber("/pidev2_images", UInt8MultiArray, callback=callback_receive_data, callback_args=("pidev1", "other_arg"))
-    subsciber_pidev1 = rospy.Subscriber("/pidev2_images", numpy_msg(int), callback=callback_receive_data, callback_args=("pidev1", "other_arg"))
+    subsciber_pidev1 = rospy.Subscriber("/pidev2_images", numpy_msg(Int8), callback=callback_receive_data, callback_args=("pidev1", "other_arg"))
 
     # stops and waits here without advancing
     try:

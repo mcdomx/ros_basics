@@ -27,6 +27,7 @@ from std_msgs.msg import MultiArrayLayout
 from std_msgs.msg import MultiArrayDimension
 
 from rospy.numpy_msg import numpy_msg
+from std_msgs.msg import Int8
 
 if __name__ == '__main__':
 
@@ -53,7 +54,7 @@ if __name__ == '__main__':
     # Create a publisher topic
     topicname = "/" + nodename + "_images"
     # pub = rospy.Publisher(topicname, UInt8MultiArray, queue_size=10)
-    pub = rospy.Publisher(topicname, numpy_msg(int), queue_size=10)
+    pub = rospy.Publisher(topicname, numpy_msg(Int8), queue_size=10)
 
     rospy.loginfo("PiCamera is publishing on {}".format(topicname))
 
