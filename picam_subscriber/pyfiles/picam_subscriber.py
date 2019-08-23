@@ -123,7 +123,7 @@ if __name__ == '__main__':
         rospy.loginfo(activeSubscriptions)
         for activeTopic in activeSubscriptions:
             rospy.loginfo("Checking: {}".format(activeTopic))
-            if activeTopic not in cur_topics]:
+            if activeTopic not in cur_topics:
                 reg.Registration.unRegisterCamera(activeTopic)
 
         rate.sleep() # this will 'pulse' the loop at the rate
