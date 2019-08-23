@@ -2,7 +2,3 @@ matplotlib
 pyyaml
 rospkg
 numpy
-tensorflow
-keras
-opencv-python
-imageai
