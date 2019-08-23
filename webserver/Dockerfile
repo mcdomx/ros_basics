@@ -36,11 +36,11 @@ RUN apt-get install -y python2.7-dev python3-dev
 RUN mkdir /opencv
 WORKDIR /opencv
 RUN wget -O opencv.zip https://github.com/Itseez/opencv/archive/3.3.0.zip
+RUN apt-get install -y unzip
 RUN unzip opencv.zip
 RUN rm -r opencv.zip
 
 RUN wget -O opencv_contrib.zip https://github.com/Itseez/opencv_contrib/archive/3.3.0.zip
-RUN apt-get install -y unzip
 RUN unzip opencv_contrib.zip
 RUN rm -r opencv_contrib.zip
 
