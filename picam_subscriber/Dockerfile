@@ -1,7 +1,6 @@
 # subscriber image
 
-# This is a will create a basic subscriber that
-# will subscribe to a simple text topic
+# Subscribes to image publication and counts objects
 
 #docker run --rm --name picam_subscriber --env ROS_MASTER_URI=http://10.0.1.4:11311 -e ROS_HOSTNAME=10.0.1.30  --tty=True --net=host picam_subscriber
 
@@ -20,8 +19,9 @@ WORKDIR /requirements
 COPY requirements.txt requirements.txt
 RUN pip3 install --no-cache -r requirements.txt
 
-
-# COPY pyfiles/picam_subscriber.py /catkin_ws/src/master_pkg/src/picam_subscriber.py
+# Download YOYLv3 object detection database
+WORKDIR /catkin_ws/src/master_pkg/src/
+RUN wget https://github.com/OlafenwaMoses/ImageAI/releases/download/1.0/yolo.h5
 
 COPY pyfiles/ /catkin_ws/src/master_pkg/src/
 
