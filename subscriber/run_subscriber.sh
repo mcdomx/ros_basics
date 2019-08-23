@@ -2,7 +2,7 @@
 
 echo "********************************************************"
 echo "SUBSCRIBER NODE"
-echo "Waiting for roscore to start on $ROS_MASTER_URI"
+echo "Looking for roscore on $ROS_MASTER_URI"
 echo "ROS_HOSTNAME: $ROS_HOSTNAME"
 echo "ROS_IP: $ROS_IP"
 echo "********************************************************"

@@ -100,13 +100,21 @@ if __name__ == '__main__':
     while not rospy.is_shutdown():
         # get list of current topics and active subscriptions
         cur_topics = rospy.get_published_topics()
+        rospy.loginfo("cur_topics:")
+        rospy.loginfo(cur_topics)
         activeSubscriptions = Registration.get_active_subscriptions()
+        rospy.loginfo("activeSubscriptions:")
+        rospy.loginfo(activeSubscriptions)
 
         # look for new topics and register new ones
         for topic in cur_topics:
+            rospy.loginfo("checking: ", topic, topic[0], topic[1])
             if topic[1] == 'std_msgs/Int16MultiArray':
+                rospy.loginfo("found valid topic to subscribe to")
                 if topic[0] not in activeSubscriptions:
+                    rospy.loginfo("{} is not active".format(topic[0]))
                     rv = Registration(topic[0])
+                        rospy.loginfo("Registrtion result: ", rv)
                         if rv is not None:
                             rospy.loginfo("{} has been subscribed.".format(topic[0]))
 
