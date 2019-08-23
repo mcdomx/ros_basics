@@ -22,7 +22,8 @@ import rospy
 import numpy as np
 from array import array
 
-from std_msgs.msg import UInt8MultiArray
+# from std_msgs.msg import UInt8MultiArray
+from std_msgs.msg import Int16MultiArray
 from std_msgs.msg import MultiArrayLayout
 from std_msgs.msg import MultiArrayDimension
 
@@ -53,8 +54,9 @@ if __name__ == '__main__':
 
     # Create a publisher topic
     topicname = "/" + nodename + "_images"
+    pub = rospy.Publisher(topicname, Int16MultiArray, queue_size=10)
     # pub = rospy.Publisher(topicname, UInt8MultiArray, queue_size=10)
-    pub = rospy.Publisher(topicname, numpy_msg(Int8), queue_size=10)
+    # pub = rospy.Publisher(topicname, numpy_msg(Int8), queue_size=10)
 
     rospy.loginfo("PiCamera is publishing on {}".format(topicname))
 
@@ -80,8 +82,9 @@ if __name__ == '__main__':
         try:
             camera.capture(img_array, 'rgb')
 
-            pub.publish(img_array)
+            # pub.publish(img_array)
             # pub.publish(UInt8MultiArray(layout=layout, data=list(img_array.flatten())))
+            pub.publish(Int16MultiArray(layout=layout, data=list(img_array.flatten())))
             print('%d - Published %dx%dx%d image' % (
                     i, img_array.shape[0], img_array.shape[1], img_array.shape[2]))
             # Here, we want to publish the array value
