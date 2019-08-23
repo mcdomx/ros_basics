@@ -22,7 +22,8 @@ def callback_receive_data(msg, args):
     # rospy.loginfo("Done converting.")
     # rospy.loginfo(data_received)
     rospy.loginfo(type(msg.data))
-    rospy.loginfo(msg.data)
+    resized_data = np.resize(msg.data, (msg.layout.dim[1].size, msg.layout.dim[0].size, msg.layout.dim[2].size))
+    rospy.loginfo(resized_data.shape)
 
     # save data somewhere so that the webserver can access it
     # overwrite anything that was already there.
