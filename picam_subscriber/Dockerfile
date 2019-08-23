@@ -21,9 +21,12 @@ COPY requirements.txt requirements.txt
 RUN pip3 install --no-cache -r requirements.txt
 
 
+# COPY pyfiles/picam_subscriber.py /catkin_ws/src/master_pkg/src/picam_subscriber.py
 
+COPY pyfiles/ /catkin_ws/src/master_pkg/src/
 
-COPY picam_subscriber.py /catkin_ws/src/master_pkg/src/picam_subscriber.py
+WORKDIR /catkin_ws/src/master_pkg/src/
+RUN ls -la
 
 WORKDIR /
 ADD  run.sh run.sh
