@@ -9,18 +9,17 @@ FROM raspbian-ros
 # Install Necessary Components and Utilities
 RUN apt-get update
 RUN apt-get install -y python3 python3-pip
-RUN apt-get install -y python python-pip
 
 # needed for the deserialization of published arrays
 RUN apt-get install -y libatlas-base-dev
 
 # Import Python Dependencies and Requirements
-RUN pip install -U tensorflow keras opencv-python
-RUN pip3 install imageai --upgrade
 RUN mkdir /requirements
 WORKDIR /requirements
 COPY requirements.txt requirements.txt
 RUN pip3 install --no-cache -r requirements.txt
+
+RUN pip3 install https://storage.googleapis.com/tensorflow-nightly/tensorflow-1.10.0-cp34-none-linux_armv7l.whl
 
 # Download YOYLv3 object detection database
 # WORKDIR /catkin_ws/src/master_pkg/src/
