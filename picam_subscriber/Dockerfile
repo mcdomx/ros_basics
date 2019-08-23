@@ -25,9 +25,6 @@ RUN pip3 install --no-cache -r requirements.txt
 
 COPY pyfiles/ /catkin_ws/src/master_pkg/src/
 
-WORKDIR /catkin_ws/src/master_pkg/src/
-RUN ls -la
-
 WORKDIR /
 ADD  run.sh run.sh
 CMD ./run.sh

@@ -34,7 +34,7 @@ class Registration:
             return None
 
         # Create a subscriber
-        new_subscription = rospy.Subscriber(new_topic, Int16MultiArray, callback=callback_receive_data, callback_args=(new_topic, "other_arg"))
+        new_subscription = rospy.Subscriber(new_topic, Int16MultiArray, callback=Registration.callback_receive_data, callback_args=(new_topic, "other_arg"))
 
         Registration.activeSubscriptions[new_topic] = new_subscription
         rospy.loginfo("{} has been subscribed.".format(new_topic))
