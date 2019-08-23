@@ -2,7 +2,7 @@
 
 # Subscribes to image publication and counts objects
 
-#docker run --rm --name picam_subscriber --env ROS_MASTER_URI=http://10.0.1.4:11311 -e ROS_HOSTNAME=10.0.1.30  --tty=True --net=host picam_subscriber
+#docker run --rm --name picam_subscriber --env ROS_MASTER_URI=http://10.0.1.4:11311 -e ROS_HOSTNAME=10.0.1.30  --tty=True --net=host -v image_data:/media/USB1 picam_subscriber
 
 FROM raspbian-ros
 

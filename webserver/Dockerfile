@@ -87,7 +87,7 @@ RUN	cmake -D CMAKE_BUILD_TYPE=RELEASE \
 		-D OPENCV_EXTRA_MODULES_PATH=/tmp/opencv_contrib-$OPENCV_VERSION/modules \
 		-D BUILD_EXAMPLES=ON .. 
 
-RUN	make -j2
+RUN	make -j1
 RUN	make install\
 	# ldconfig && \
 	&& make clean
