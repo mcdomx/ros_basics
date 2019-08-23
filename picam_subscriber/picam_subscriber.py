@@ -49,7 +49,8 @@ class Registration:
         new_subscription = rospy.Subscriber(new_topic, Int16MultiArray, callback=callback_receive_data, callback_args=(new_topic, "other_arg"))
 
         Registration.activeSubscriptions[new_topic] = new_subscription
-        return new_subscription
+        rospy.loginfo("{} has been subscribed.".format(new_topic))
+        return None
 
 
 
@@ -114,10 +115,7 @@ if __name__ == '__main__':
                 rospy.loginfo("found valid topic to subscribe to")
                 if topic[0] not in activeSubscriptions:
                     rospy.loginfo("{} is not active".format(topic[0]))
-                    rv = Registration(topic[0])
-                    rospy.loginfo("Registrtion result: ", rv)
-                    if rv is not None:
-                        rospy.loginfo("{} has been subscribed.".format(topic[0]))
+                    Registration(topic[0])
 
         rate.sleep() # this will 'pulse' the loop at the rate
 
