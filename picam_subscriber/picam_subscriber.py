@@ -115,8 +115,8 @@ if __name__ == '__main__':
                     rospy.loginfo("{} is not active".format(topic[0]))
                     rv = Registration(topic[0])
                     rospy.loginfo("Registrtion result: ", rv)
-                        if rv is not None:
-                            rospy.loginfo("{} has been subscribed.".format(topic[0]))
+                    if rv is not None:
+                        rospy.loginfo("{} has been subscribed.".format(topic[0]))
 
         rate.sleep() # this will 'pulse' the loop at the rate
 
