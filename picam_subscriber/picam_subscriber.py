@@ -109,15 +109,15 @@ if __name__ == '__main__':
 
         # look for new topics and register new ones
         for topic in cur_topics:
-            rospy.loginfo("checking: ", topic, topic[0], topic[1])
+            rospy.loginfo("checking: ", str(topic), str(topic[0]), str(topic[1]))
             if topic[1] == 'std_msgs/Int16MultiArray':
                 rospy.loginfo("found valid topic to subscribe to")
                 if topic[0] not in activeSubscriptions:
-                    rospy.loginfo("{} is not active".format(topic[0]))
+                    rospy.loginfo("{%s} is not active".format(topic[0]))
                     rv = Registration(topic[0])
                     rospy.loginfo("Registrtion result: ", rv)
                     if rv is not None:
-                        rospy.loginfo("{} has been subscribed.".format(topic[0]))
+                        rospy.loginfo("{%s} has been subscribed.".format(topic[0]))
 
         rate.sleep() # this will 'pulse' the loop at the rate
 
