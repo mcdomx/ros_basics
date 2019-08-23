@@ -12,7 +12,7 @@ img_detector.setModelPath(os.path.join("/catkin_ws/src/master_pkg/src/" , "yolo.
 img_detector.loadModel(detection_speed="fast") #normal, fast, faster, fastest, flash
 # Note increases in speed should coorespond to lower a 'min. % probability' value
 
-def count(image_array)
+def count(image_array):
     try:
         det_frame, detections = img_detector.detectObjectsFromImage(
             input_type="array",

@@ -21,7 +21,7 @@ RUN pip3 install --no-cache -r requirements.txt
 
 # Download YOYLv3 object detection database
 WORKDIR /catkin_ws/src/master_pkg/src/
-RUN wget https://github.com/OlafenwaMoses/ImageAI/releases/download/1.0/yolo.h5
+RUN wget -q https://github.com/OlafenwaMoses/ImageAI/releases/download/1.0/yolo.h5
 
 COPY pyfiles/ /catkin_ws/src/master_pkg/src/
 
