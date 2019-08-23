@@ -18,28 +18,23 @@ from std_msgs.msg import Int8
 # This class will instantiate a new Subscriber instance
 # when a new topic is recognized in the network.
 class Registration:
-    # todo make these local only
+    # todo make this local only
     activeSubscriptions = {}
-    deactivatedTopics = []
 
     # called when published
     def callback_receive_data(msg, args):
         rospy.loginfo(str(args[0]))
         try:
-            rospy.loginfo(msg.layout)
-            rospy.loginfo(type(msg.data))
+            # rospy.loginfo(msg.layout)
+            # rospy.loginfo(type(msg.data))
             resized_data = np.resize(msg.data, (msg.layout.dim[1].size, msg.layout.dim[0].size, msg.layout.dim[2].size))
-            rospy.loginfo(resized_data.shape)
+            rospy.loginfo("Received message with shape: {}".format(resized_data.shape))
         except:
             # Failed call - deregister subscriber
             Registration.unRegisterCamera(args[0])
 
 
     def __init__(self, new_topic):
-
-        if new_topic in Registration.deactivatedTopics:
-            rospy.loginfo("{} has already once been deactivated because it was not a camera.  Not registering".format(new_topic))
-            return None
 
         if new_topic in Registration.activeSubscriptions.keys():
             rospy.loginfo("{} is already active.  No action taken.".format(new_topic))
@@ -61,8 +56,9 @@ class Registration:
             return None
 
         subscription = Registration.activeSubscriptions[topic_name]
-        Registration.deactivatedTopics.append(topic_name)
         subscription.unregister()
+        del Registration.activeSubscriptions[topic_name]
+        rospy.loginfo("Deregistered: {}".format(topic_name))
         return topic_name
 
     @staticmethod
@@ -116,6 +112,11 @@ if __name__ == '__main__':
                 if topic[0] not in activeSubscriptions:
                     rospy.loginfo("{} is not active".format(topic[0]))
                     Registration(topic[0])
+
+        # look for topics that are no longer being published
+        for activeTopic in activeSubscriptions:
+            if activeTopic not in cur_topics:
+                Registration.unRegisterCamera(activeTopic)
 
         rate.sleep() # this will 'pulse' the loop at the rate
 
