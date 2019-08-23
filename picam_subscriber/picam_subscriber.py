@@ -18,6 +18,7 @@ from std_msgs.msg import Int8
 # This class will instantiate a new Subscriber instance
 # when a new topic is recognized in the network.
 class Registration:
+    # todo make these local only
     activeSubscriptions = {}
     deactivatedTopics = []
 
@@ -65,7 +66,7 @@ class Registration:
 
     @staticmethod
     def get_active_subscriptions():
-        return activeSubscriptions.keys()
+        return Registration.activeSubscriptions.keys()
 
 
 
