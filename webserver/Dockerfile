@@ -76,9 +76,9 @@ RUN	wget -c -N -nv -O opencv.zip https://github.com/opencv/opencv/archive/$OPENC
 	
 	# build opencv \
 WORKDIR	/tmp/opencv-$OPENCV_VERSION
-RUN	mkdir build \
-	&& cd build \
-	&& cmake -D CMAKE_BUILD_TYPE=RELEASE \
+RUN	mkdir build
+WORKDIR	build
+RUN	cmake -D CMAKE_BUILD_TYPE=RELEASE \
 		-D CMAKE_INSTALL_PREFIX=/usr/local \
 		-D INSTALL_C_EXAMPLES=ON \
 		-D BUILD_PYTHON_SUPPORT=ON \
@@ -87,13 +87,14 @@ RUN	mkdir build \
 		-D OPENCV_EXTRA_MODULES_PATH=/tmp/opencv_contrib-$OPENCV_VERSION/modules \
 		-D BUILD_EXAMPLES=ON .. 
 
-RUN	make -j2  \
-	&& make install\
+RUN	make -j2
+RUN	make install\
 	# ldconfig && \
-	&& make clean \
-	# cleanup source \
-	&& cd / \
-	&& rm -rf /tmp/* \
+	&& make clean
+
+	# cleanup source
+WORKDIR	cd /
+RUN	rm -rf /tmp/* \
 	&& pip install imutils picamera \
 	&& pip3 install imutils picamera \
 	&& date \
