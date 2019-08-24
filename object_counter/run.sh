@@ -6,7 +6,7 @@ echo "HOSTNAME: $(hostname)"
 echo "********************************************************"
 
 
-# Start main.py
-python3 count_server.py
+# Start
+python3 /pyfiles/count_server.py
 
 echo ">>>>>>>>>>>> counting server is running as: $(hostname)"

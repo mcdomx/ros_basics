@@ -22,14 +22,16 @@
 
 # Data is exchanged using share Docker volumes.
 
-import rospy
 
+import objectCounter
 
 if __name__ == '__main__':
-        rospy.init_node('counting_server')
-        rospy.loginfo("Counting server has been started")
 
-        # stops and waits for here until message received
-        rospy.spin()
+	print("Obect Counter has started")
+	# Get a new image array
 
-        rospy.loginfo("exiting counting_server.py")
+	# Count the objects in the array
+
+	# Create a file with a dictionary entry of counted objects and occurrances
+
+	# Put the dict file back on the device where the image came from
