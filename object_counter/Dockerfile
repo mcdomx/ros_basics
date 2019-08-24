@@ -6,6 +6,7 @@ FROM rpi-docker-tensorflow
 
 #### Add ImageAI
 
+RUN pip install --upgrade pip
 RUN pip install -U tensorflow keras opencv-python-headless
 RUN pip3 install imageai --upgrade
 
